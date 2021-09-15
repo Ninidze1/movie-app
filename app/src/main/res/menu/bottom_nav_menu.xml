@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home"
+        app:cnb_iconColor="@color/main_color"
+        app:cnb_textColor="@color/main_color" />
+
+    <item
+        android:id="@+id/navigation_navigation"
+        android:icon="@drawable/ic_bookmark"
+        android:title="@string/navigation"
+        app:cnb_iconColor="@color/main_color"
+        app:cnb_textColor="@color/main_color" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="Profile"
+        app:cnb_iconColor="@color/main_color"
+        app:cnb_textColor="@color/main_color" />
+
+</menu>
