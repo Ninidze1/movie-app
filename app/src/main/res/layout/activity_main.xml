@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:clipChildren="false"
-    android:background="@color/white"
     android:layout_height="match_parent"
+    android:background="@color/secondary_color"
     tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -20,15 +19,27 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/main_navigation" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment"
+        app:menu="@menu/bottom_nav_menu" />
+
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:id="@+id/bottom_nav_bar"
         android:layout_width="match_parent"
-        android:layout_height="62dp"
-        android:elevation="4dp"
+        android:layout_height="70dp"
         android:layout_gravity="bottom"
         android:background="@drawable/bottom_navbar_shape"
-        app:cnb_iconSize="24dp"
+        android:elevation="40dp"
+        app:cnb_iconSize="28dp"
         app:cnb_menuResource="@menu/bottom_nav_menu"
+        app:cnb_unselectedColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

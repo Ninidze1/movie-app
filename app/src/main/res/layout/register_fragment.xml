@@ -2,16 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/secondary_color"
     android:layout_height="match_parent"
-    tools:context=".screens.bottom_nav.profile.ProfileFragment">
+    android:background="@color/secondary_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screens.auth.register.RegisterFragment">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile Fragment"
+        android:text="Register Fragment"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,4 +1,4 @@
-package com.example.moviesapplication
+package com.example.moviesapplication.screens.bottom_nav.profile
 
 import androidx.lifecycle.ViewModel
 

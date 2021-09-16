@@ -7,25 +7,17 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.moviesapplication.DashboardFragment"
+        android:name="com.example.moviesapplication.screens.bottom_nav.dashboard.DashboardFragment"
         android:label="dashboard_fragment"
-        tools:layout="@layout/dashboard_fragment" >
-        <action
-            android:id="@+id/action_navigation_dashboard_to_moviedetailsFragment"
-            app:destination="@id/moviedetailsFragment" />
-    </fragment>
+        tools:layout="@layout/dashboard_fragment" />
     <fragment
         android:id="@+id/moviedetailsFragment"
-        android:name="com.example.moviesapplication.MoviedetailsFragment"
+        android:name="com.example.moviesapplication.screens.bottom_nav.moredetails.MoviedetailsFragment"
         android:label="moviedetails_fragment"
-        tools:layout="@layout/moviedetails_fragment" >
-        <action
-            android:id="@+id/action_moviedetailsFragment_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
-    </fragment>
+        tools:layout="@layout/moviedetails_fragment" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.moviesapplication.ProfileFragment"
+        android:name="com.example.moviesapplication.screens.bottom_nav.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
 </navigation>
