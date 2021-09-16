@@ -11,13 +11,27 @@
         android:label="dashboard_fragment"
         tools:layout="@layout/dashboard_fragment" />
     <fragment
-        android:id="@+id/moviedetailsFragment"
-        android:name="com.example.moviesapplication.screens.bottom_nav.moredetails.MoviedetailsFragment"
+        android:id="@+id/navigation_favourites"
+        android:name="com.example.moviesapplication.screens.bottom_nav.favourites.FavouritesFragment"
         android:label="moviedetails_fragment"
-        tools:layout="@layout/moviedetails_fragment" />
+        tools:layout="@layout/favourites_fragment" />
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.moviesapplication.screens.bottom_nav.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/main_auth"
+        android:name="com.example.moviesapplication.screens.auth.AuthFragment"
+        android:label="auth_fragment"
+        tools:layout="@layout/auth_fragment" />
+    <action
+        android:id="@+id/action_global_navigation_dashboard"
+        app:destination="@id/navigation_dashboard"
+        app:popUpTo="@id/main_auth"
+        app:popUpToInclusive="true"
+        app:enterAnim="@anim/slide_in_top"
+        app:exitAnim="@anim/slide_out_bot"
+        app:popEnterAnim="@anim/slide_in_bot"
+        app:popExitAnim="@anim/slide_out_top"/>
 </navigation>

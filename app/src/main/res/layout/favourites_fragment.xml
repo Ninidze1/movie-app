@@ -5,13 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/secondary_color"
     android:layout_height="match_parent"
-    tools:context=".screens.bottom_nav.moredetails.MovieDetailsFragment">
+    tools:context=".screens.bottom_nav.favourites.FavouritesFragment">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Movie Details"
+        android:text="Favourites Details"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"

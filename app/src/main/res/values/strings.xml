@@ -2,4 +2,25 @@
     <string name="app_name">MoviesApplication</string>
     <string name="home">Home</string>
     <string name="navigation">Navigation</string>
+    <string name="favourites">Favourites</string>
+    <string name="profile">Profile</string>
+    <string name="email">Email</string>
+    <string name="name_surname">Name / Surname</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_account">Already have account ?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="register">Register</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_up_to_continue">Sign Up to continue</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot password ?</string>
+    <string name="new_user">New user ?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="welcome">Welcome</string>
+    <string name="sign_in_to_continue">Sign In to continue</string>
+    <string name="enter_email_which_you_use_for_authentication">Enter email which you use for authentication</string>
+    <string name="reset">Reset</string>
+    <string name="enter_an_email_address_you_use_to_sign_in_to">Enter an email address you use to Sign In to</string>
+    <string name="reset_password">Reset Password</string>
 </resources>

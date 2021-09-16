@@ -15,7 +15,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>(
     ProfileViewModel::class.java
 ) {
     override fun init(inflater: LayoutInflater, container: ViewGroup?) {
-        TODO("Not yet implemented")
+
     }
 
 
