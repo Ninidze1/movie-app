@@ -2,6 +2,7 @@ package com.example.moviesapplication.repository.movies
 
 import com.example.moviesapplication.entity.GenreResponse
 import com.example.moviesapplication.entity.ResponseItems
+import com.example.moviesapplication.entity.SearchResponse
 import com.example.moviesapplication.network.NetworkService
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.utils.Constants.LANG_ENG
@@ -48,12 +49,12 @@ class MovieRepositoryImpl @Inject constructor(private val apiService: NetworkSer
         }
     }
 
-    override suspend fun searchMovie(query: String): Resource<ResponseItems> {
+    override suspend fun searchMovie(query: String): Resource<SearchResponse> {
         return try {
             val response = apiService.searchMovie(
                 query,
                 LANG_ENG,
-                NETWORK_PAGE_SIZE
+                1
             )
             if (response.isSuccessful) {
                 Resource.success(response.body()!!)

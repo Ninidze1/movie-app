@@ -18,7 +18,10 @@
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/drawable-v24/ic_cancel.xml" value="0.2703125" />
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/drawable-v24/ic_lock.xml" value="0.2703125" />
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/drawable/edit_text_shape.xml" value="0.2703125" />
+        <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/drawable/edit_text_shape_clicked.xml" value="0.2703125" />
+        <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/drawable/edit_text_shape_search.xml" value="0.2703125" />
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/drawable/ic_calendar.xml" value="0.15833333333333333" />
+        <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/drawable/ic_close.xml" value="0.2703125" />
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/drawable/ic_global.xml" value="0.15833333333333333" />
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/drawable/ic_placeholder.xml" value="0.2703125" />
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/drawable/ic_search.xml" value="0.2703125" />
@@ -28,6 +31,7 @@
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/layout/auth_fragment.xml" value="0.12" />
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/layout/dashboard_fragment.xml" value="0.264" />
+        <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/layout/drop_down_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/layout/favourites_fragment.xml" value="0.13020833333333334" />
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/layout/genres_item.xml" value="0.4" />
         <entry key="..\:/Apps/Android Projects/MoviesApplication/app/src/main/res/layout/login_fragment.xml" value="0.264" />

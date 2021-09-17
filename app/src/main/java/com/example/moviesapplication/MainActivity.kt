@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                         navController.navController.navigate(R.id.action_global_navigation_dashboard)
                     }
                     R.id.navigation_dashboard -> {
-                        finishAndRemoveTask()
+                        finish()
                     }
                 }
             }

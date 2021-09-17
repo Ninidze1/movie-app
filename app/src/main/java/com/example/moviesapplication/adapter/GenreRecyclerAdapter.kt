@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapplication.databinding.GenresItemBinding
 import com.example.moviesapplication.entity.Genre
 
-typealias genreClick = (genre: String) -> Unit
+typealias genreClick = (genreId: Int) -> Unit
 class GenreRecyclerAdapter: RecyclerView.Adapter<GenreRecyclerAdapter.ItemHolder>() {
 
     lateinit var genreClick: genreClick
@@ -19,7 +19,7 @@ class GenreRecyclerAdapter: RecyclerView.Adapter<GenreRecyclerAdapter.ItemHolder
             binding.genre.text = model.name
 
             binding.root.setOnClickListener {
-                genreClick.invoke(model.name.toString())
+                model.id?.let { it1 -> genreClick.invoke(it1) }
             }
 
         }

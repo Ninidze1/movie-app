@@ -16,13 +16,13 @@ class DashBoardRecyclerAdapter: RecyclerView.Adapter<DashBoardRecyclerAdapter.It
         fun bind() {
             model = items[absoluteAdapterPosition]
 
-            val year = model.firstAirDate?.substring(0, 4)
-            binding.title.text = model.name
+            val year = model.releaseDate?.substring(0, 4)
+            binding.title.text = model.title
             binding.rating.text = model.voteAverage.toString()
             binding.yearTv.text = year
-            if (model.origin?.isNotEmpty() == true)
-                binding.languageTv.text = model.origin?.get(0).toString()
-            model.backdrop_path?.let { binding.imageView.loadImg(IMG_DOMAIN + model.posterPath) }
+            if (model.originalLanguage?.isNotEmpty() == true)
+                binding.languageTv.text = model.originalLanguage.toString()
+            model.posterPath?.let { binding.imageView.loadImg(IMG_DOMAIN + model.posterPath) }
         }
 
     }
@@ -40,6 +40,7 @@ class DashBoardRecyclerAdapter: RecyclerView.Adapter<DashBoardRecyclerAdapter.It
     fun addItems(item: MutableList<MovieItem>) {
         this.items.clear()
         this.items.addAll(item)
-        notifyDataSetChanged()
+        notifyItemRangeRemoved(0, item.size);
+        notifyItemRangeChanged(0, item.size)
     }
 }
