@@ -7,15 +7,32 @@
     android:background="@color/secondary_color"
     tools:context=".screens.bottom_nav.dashboard.DashboardFragment">
 
+    <TextView
+        android:id="@+id/popularTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/proxima_black"
+        android:text="Popular"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/dashboardRecycler"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dashboardRecycler"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar" />
+        app:layout_constraintTop_toBottomOf="@+id/search_bar"
+        app:layout_constraintVertical_bias="0.18" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/search_bar"
@@ -43,13 +60,13 @@
         android:id="@+id/loadingAnim"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:lottie_autoPlay="true"
         android:visibility="gone"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/anim_loading"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/dashboardRecycler"
-        app:layout_constraintTop_toTopOf="@+id/dashboardRecycler" />
+        app:layout_constraintTop_toTopOf="@+id/dashboardRecycler"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/anim_loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

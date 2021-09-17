@@ -1,6 +1,6 @@
 package com.example.moviesapplication.network
 
-import com.example.moviesapplication.entity.MovieItem
+import com.example.moviesapplication.entity.ResponseItems
 import com.example.moviesapplication.utils.Constants.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
@@ -11,5 +11,5 @@ interface MovieService {
     suspend fun getPopularMovies(
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Response<List<MovieItem>>
+    ): Response<ResponseItems>
 }

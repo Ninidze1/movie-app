@@ -3,9 +3,10 @@ package com.example.moviesapplication.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moviesapplication.entity.MovieItem
 import com.example.moviesapplication.databinding.PosterItemBinding
+import com.example.moviesapplication.entity.MovieItem
 import com.example.moviesapplication.extensions.loadImg
+import com.example.moviesapplication.utils.Constants.IMG_DOMAIN
 
 class DashBoardRecyclerAdapter: RecyclerView.Adapter<DashBoardRecyclerAdapter.ItemHolder>() {
     private val items: MutableList<MovieItem> = mutableListOf()
@@ -14,10 +15,13 @@ class DashBoardRecyclerAdapter: RecyclerView.Adapter<DashBoardRecyclerAdapter.It
         private lateinit var model: MovieItem
         fun bind() {
             model = items[absoluteAdapterPosition]
+
+            val year = model.firstAirDate?.substring(0,4)
             binding.title.text = model.name
             binding.rating.text = model.voteAverage.toString()
-            val baseUrl = "https://image.tmdb.org/t/p/w500"
-            model.backdrop_path?.let { binding.imageView.loadImg(baseUrl+model.posterPath) }
+            binding.yearTv.text = year
+            binding.languageTv.text = model.origin?.get(0).toString()
+            model.backdrop_path?.let { binding.imageView.loadImg(IMG_DOMAIN+model.posterPath) }
         }
     }
 

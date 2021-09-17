@@ -42,7 +42,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
             when (data.status) {
                 Resource.Status.SUCCESS -> {
                     binding.loadingAnim.setGone()
-                    data.data?.let { adapter.addItems(it.toMutableList()) }
+                    data.data?.results?.let { adapter.addItems(it.toMutableList()) }
                 }
                 Resource.Status.ERROR -> {
                     d("loadingErroR", "${data.message}")

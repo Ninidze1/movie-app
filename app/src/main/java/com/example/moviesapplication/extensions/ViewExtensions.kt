@@ -23,7 +23,6 @@ fun ImageView.loadImg(url: String) {
 
     Glide.with(this.context)
         .load(url)
-        .circleCrop()
         .placeholder(R.drawable.ic_placeholder)
         .error(R.drawable.ic_placeholder)
         .into(this)

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviesapplication.entity.MovieItem
+import com.example.moviesapplication.entity.ResponseItems
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.repository.movies.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +18,8 @@ class DashboardViewModel @Inject constructor(
     private val movieRep: MovieRepository
     ) : ViewModel() {
 
-    private var _popularMovies = MutableLiveData<Resource<List<MovieItem>>>()
-    val popularMovies: LiveData<Resource<List<MovieItem>>> = _popularMovies
+    private var _popularMovies = MutableLiveData<Resource<ResponseItems>>()
+    val popularMovies: LiveData<Resource<ResponseItems>> = _popularMovies
 
 
     fun getPopularMovies() {
