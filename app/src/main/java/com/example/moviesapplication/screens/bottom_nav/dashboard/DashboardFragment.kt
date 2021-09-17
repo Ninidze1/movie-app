@@ -4,6 +4,8 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.example.moviesapplication.adapter.DashBoardRecyclerAdapter
 import com.example.moviesapplication.base.BaseFragment
 import com.example.moviesapplication.databinding.DashboardFragmentBinding
@@ -29,7 +31,6 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         recyclerSetup()
         observers()
         listener()
-
     }
 
     private fun listener() {
@@ -63,5 +64,8 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         adapter = DashBoardRecyclerAdapter()
         binding.dashboardRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.dashboardRecycler.adapter = adapter
+
+        val snapHelper: SnapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.dashboardRecycler)
     }
 }

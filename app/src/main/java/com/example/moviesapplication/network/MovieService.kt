@@ -12,4 +12,10 @@ interface MovieService {
         @Query("language") language: String,
         @Query("page") page: Int
     ): Response<ResponseItems>
+
+    @GET("/movie/latest?api_key=$API_KEY")
+    suspend fun getLatestMovies(
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Response<ResponseItems>
 }

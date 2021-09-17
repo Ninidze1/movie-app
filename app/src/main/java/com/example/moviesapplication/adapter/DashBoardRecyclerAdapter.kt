@@ -20,7 +20,8 @@ class DashBoardRecyclerAdapter: RecyclerView.Adapter<DashBoardRecyclerAdapter.It
             binding.title.text = model.name
             binding.rating.text = model.voteAverage.toString()
             binding.yearTv.text = year
-            binding.languageTv.text = model.origin?.get(0).toString()
+            if (model.origin!!.isNotEmpty())
+                binding.languageTv.text = model.origin?.get(0).toString()
             model.backdrop_path?.let { binding.imageView.loadImg(IMG_DOMAIN+model.posterPath) }
         }
     }

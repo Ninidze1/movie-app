@@ -20,4 +20,17 @@ class MovieRepositoryImpl @Inject constructor(private val apiService: MovieServi
             Resource.error(e.message.toString())
         }
     }
+
+    override suspend fun getLatestMovies(): Resource<ResponseItems> {
+        return try {
+            val response = apiService.getLatestMovies(LANG_ENG, NETWORK_PAGE_SIZE)
+            if (response.isSuccessful) {
+                Resource.success(response.body()!!)
+            } else {
+                Resource.error(response.message())
+            }
+        } catch (e: Exception) {
+            Resource.error(e.message.toString())
+        }
+    }
 }
