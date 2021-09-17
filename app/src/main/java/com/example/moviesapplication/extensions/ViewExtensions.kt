@@ -1,10 +1,9 @@
 package com.example.moviesapplication.extensions
 
 import android.view.View
-import android.view.animation.TranslateAnimation
-import androidx.navigation.NavDirections
-import androidx.navigation.findNavController
-import com.ismaeldivita.chipnavigation.ChipNavigationBar
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.example.moviesapplication.R
 
 
 fun View.show() {
@@ -18,6 +17,19 @@ fun View.hide() {
 fun View.setGone() {
     visibility = View.GONE
 }
+
+
+fun ImageView.loadImg(url: String) {
+
+    Glide.with(this.context)
+        .load(url)
+        .circleCrop()
+        .placeholder(R.drawable.ic_placeholder)
+        .error(R.drawable.ic_placeholder)
+        .into(this)
+
+}
+
 
 //fun View.slideDown(duration: Int = 400) {
 //    show()

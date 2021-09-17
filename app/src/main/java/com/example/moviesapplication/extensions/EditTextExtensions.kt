@@ -15,9 +15,9 @@ fun EditText.resetField() {
 
 fun EditText.setErrorField(errorText: String? = null) {
     setBackgroundResource(R.drawable.costum_error_input)
+    text.clear()
     if (errorText != null) {
         context.showToast(errorText)
-        text.clear()
     }
 
 }

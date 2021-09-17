@@ -28,10 +28,10 @@
     <action
         android:id="@+id/action_global_navigation_dashboard"
         app:destination="@id/navigation_dashboard"
-        app:popUpTo="@id/main_auth"
-        app:popUpToInclusive="true"
         app:enterAnim="@anim/slide_in_top"
         app:exitAnim="@anim/slide_out_bot"
         app:popEnterAnim="@anim/slide_in_bot"
-        app:popExitAnim="@anim/slide_out_top"/>
+        app:popExitAnim="@anim/slide_out_top"
+        app:popUpTo="@id/main_navigation"
+        app:popUpToInclusive="true" />
 </navigation>

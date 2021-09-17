@@ -10,7 +10,9 @@ import com.example.moviesapplication.databinding.ActivityMainBinding
 import com.example.moviesapplication.extensions.setGone
 import com.example.moviesapplication.extensions.show
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.navigation_dashboard -> {
                     chipNavigation.setItemSelected(R.id.navigation_dashboard)
+                    handleBackPressed(destination)
                 }
                 R.id.navigation_favourites -> {
                     chipNavigation.setItemSelected(R.id.navigation_favourites)
@@ -66,13 +69,15 @@ class MainActivity : AppCompatActivity() {
                         navController = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
                         navController.navController.navigate(R.id.action_global_navigation_dashboard)
                     }
+                    R.id.navigation_dashboard -> {
+                        finishAndRemoveTask()
+                    }
                 }
             }
         })
     }
 
     private fun hideIfAuth(destination: NavDestination, navBar: ChipNavigationBar) {
-
         if (destination.id == R.id.main_auth)
             navBar.setGone()
         else {
