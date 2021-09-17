@@ -24,4 +24,5 @@
     <string name="enter_an_email_address_you_use_to_sign_in_to">Enter an email address you use to Sign In to</string>
     <string name="reset_password">Reset Password</string>
     <string name="search">Search</string>
+    <string name="popular">Popular</string>
 </resources>

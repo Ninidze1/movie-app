@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.example.moviesapplication.adapter.DashBoardRecyclerAdapter
+import com.example.moviesapplication.adapter.GenreRecyclerAdapter
 import com.example.moviesapplication.base.BaseFragment
 import com.example.moviesapplication.databinding.DashboardFragmentBinding
 import com.example.moviesapplication.extensions.setGone
@@ -24,7 +25,11 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
 
     @Inject
     lateinit var auth: FirebaseRepository
-    private lateinit var adapter: DashBoardRecyclerAdapter
+
+    private lateinit var popularAdapter: DashBoardRecyclerAdapter
+    private lateinit var genresAdapter: GenreRecyclerAdapter
+
+    private lateinit var snapHelper: SnapHelper
 
     override fun init(inflater: LayoutInflater, container: ViewGroup?) {
         requestMovies()
@@ -34,7 +39,10 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
     }
 
     private fun listener() {
+        genresAdapter.genreClick = { genre ->
 
+            viewModel.searchMovie(genre)
+        }
     }
 
     private fun observers() {
@@ -43,7 +51,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
             when (data.status) {
                 Resource.Status.SUCCESS -> {
                     binding.loadingAnim.setGone()
-                    data.data?.results?.let { adapter.addItems(it.toMutableList()) }
+                    data.data?.results?.let { popularAdapter.addItems(it.toMutableList()) }
                 }
                 Resource.Status.ERROR -> {
                     d("loadingErroR", "${data.message}")
@@ -53,19 +61,47 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
                 }
             }
         })
+
+        viewModel.genres.observe(viewLifecycleOwner, { data ->
+
+            when (data.status) {
+                Resource.Status.SUCCESS -> {
+                    d("loadingErroR", "${data.data}2")
+
+                    data.data?.result?.let { genresAdapter.addItems(it.toMutableList()) }
+                }
+                Resource.Status.ERROR -> {
+                    d("loadingErroR", "${data.message}")
+                }
+                Resource.Status.LOADING -> { }
+            }
+        })
     }
 
     private fun requestMovies() {
         binding.loadingAnim.show()
         viewModel.getPopularMovies()
+        viewModel.getGenres()
     }
 
     private fun recyclerSetup() {
-        adapter = DashBoardRecyclerAdapter()
-        binding.dashboardRecycler.layoutManager = LinearLayoutManager(requireContext())
-        binding.dashboardRecycler.adapter = adapter
+        snapHelper = LinearSnapHelper()
+        popularRecycler()
+        genresRecycler()
+    }
 
-        val snapHelper: SnapHelper = LinearSnapHelper()
+    private fun genresRecycler() {
+
+        genresAdapter = GenreRecyclerAdapter()
+        binding.genre.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.genre.adapter = genresAdapter
+        snapHelper.attachToRecyclerView(binding.genre)
+    }
+
+    private fun popularRecycler() {
+        popularAdapter = DashBoardRecyclerAdapter()
+        binding.dashboardRecycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.dashboardRecycler.adapter = popularAdapter
         snapHelper.attachToRecyclerView(binding.dashboardRecycler)
     }
 }

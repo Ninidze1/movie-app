@@ -14,9 +14,22 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/proxima_black"
-        android:text="Popular"
+        android:text="@string/popular"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genre" />
+
+    <TextView
+        android:id="@+id/genres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/proxima_black"
+        android:text="@string/popular"
+        android:textColor="@color/white"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genre" />
 
@@ -69,9 +82,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/genre"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bar" />
 

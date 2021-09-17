@@ -1,7 +1,7 @@
 package com.example.moviesapplication.di
 
 import androidx.viewbinding.BuildConfig
-import com.example.moviesapplication.network.MovieService
+import com.example.moviesapplication.network.NetworkService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,6 +45,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideService(retrofit: Retrofit): MovieService = retrofit.create(MovieService::class.java)
+    fun provideService(retrofit: Retrofit): NetworkService = retrofit.create(NetworkService::class.java)
 
 }
