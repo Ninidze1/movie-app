@@ -36,3 +36,4 @@ data class MovieItem(
     @SerializedName("vote_average")
     val voteAverage: Double?,
 )
+

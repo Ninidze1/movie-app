@@ -14,7 +14,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/backgroundPoster"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="250dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,15 +32,10 @@
             android:id="@+id/linearLayoutCompat"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@drawable/edit_text_shape_clicked"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline2">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/edit_text_shape_clicked">
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.cardview.widget.CardView
@@ -51,7 +46,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             app:cardCornerRadius="18dp"
-            app:cardElevation="15dp"
+            app:cardElevation="45dp"
             app:layout_constraintBottom_toBottomOf="@+id/backgroundPoster"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/backgroundPoster">
@@ -60,10 +55,9 @@
                 android:id="@+id/posterImg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/edit_text_shape"
+                android:background="@color/gray_blue"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/ic_launcher_background" />
-
 
         </androidx.cardview.widget.CardView>
 
@@ -138,7 +132,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
             android:fontFamily="@font/montera_regular"
-            android:text=""
             android:textColor="@color/gray_blue"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -170,7 +163,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/similarTv" />
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -179,6 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
+            android:elevation="50dp"
             android:background="@drawable/item_shape"
             android:padding="8dp"
             android:src="@drawable/ic_fav_passive"
@@ -189,6 +185,7 @@
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="50dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:background="@android:color/transparent"

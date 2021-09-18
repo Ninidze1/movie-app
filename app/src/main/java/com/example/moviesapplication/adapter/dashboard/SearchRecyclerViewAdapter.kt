@@ -4,21 +4,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapplication.databinding.DropDownItemBinding
-import com.example.moviesapplication.entity.Genre
+import com.example.moviesapplication.entity.Search
 
 typealias onModelClick = (id: Int) -> Unit
 class SearchRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    lateinit var onModelClick: onModelClick
-    private val items = mutableListOf<Genre>()
+    lateinit var onResultClick: onModelClick
+    private val items = mutableListOf<Search>()
 
     inner class ViewHolder(private val binding: DropDownItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private lateinit var model: Genre
+        private lateinit var model: Search
         fun bind() {
             model = items[absoluteAdapterPosition]
-            binding.textView.text = model.name.toString()
+            binding.textView.text = model.title.toString()
             binding.root.setOnClickListener {
-                model.id?.let { id -> onModelClick.invoke(id) }
+                model.id?.let { id -> onResultClick.invoke(id) }
             }
         }
     }
@@ -41,7 +41,7 @@ class SearchRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
 
     override fun getItemCount(): Int = items.size
 
-    fun addData(items: MutableList<Genre>) {
+    fun addData(items: MutableList<Search>) {
         this.items.clear()
         this.items.addAll(items)
         notifyItemRangeRemoved(0, items.size);

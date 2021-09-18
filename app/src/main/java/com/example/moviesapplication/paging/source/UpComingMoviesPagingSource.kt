@@ -3,7 +3,7 @@ package com.example.moviesapplication.paging.source
 import android.util.Log.d
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.moviesapplication.entity.MovieItem
+import com.example.moviesapplication.entity.MoviePoster
 import com.example.moviesapplication.network.NetworkService
 import com.example.moviesapplication.utils.Constants.STARTING_PAGE_INDEX
 import retrofit2.HttpException
@@ -12,15 +12,15 @@ import java.io.IOException
 class UpComingMoviesPagingSource(
     private val apiService: NetworkService
 ) :
-    PagingSource<Int, MovieItem>() {
-    override fun getRefreshKey(state: PagingState<Int, MovieItem>): Int? {
+    PagingSource<Int, MoviePoster>() {
+    override fun getRefreshKey(state: PagingState<Int, MoviePoster>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieItem> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MoviePoster> {
         val position = params.key ?: STARTING_PAGE_INDEX
         return try {
             val response = apiService.getUpComingMovies(position)

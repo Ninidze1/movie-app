@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 
 
@@ -38,5 +40,13 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    protected fun putInBundleAndNavigate(movieId: Int, destination: Int) {
+        val bundle = bundleOf("movieId" to movieId)
+        findNavController().navigate(
+            destination,
+            bundle
+        )
     }
 }

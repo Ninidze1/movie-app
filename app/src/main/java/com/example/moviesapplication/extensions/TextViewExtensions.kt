@@ -15,3 +15,11 @@ fun TextView.titleAdjust() {
         in 28..35 -> {changeSp(11f)}
     }
 }
+
+fun TextView.titleAdjustForDash() {
+    when (text.length) {
+        in 1..16 -> {changeSp(15f)}
+        in 19..27 -> {changeSp(13f)}
+        in 28..35 -> {changeSp(11f)}
+    }
+}

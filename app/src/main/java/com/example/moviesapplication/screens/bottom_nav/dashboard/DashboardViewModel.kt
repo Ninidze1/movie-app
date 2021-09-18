@@ -8,7 +8,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.moviesapplication.entity.GenreResponse
 import com.example.moviesapplication.entity.MovieItem
-import com.example.moviesapplication.entity.SearchResponse
+import com.example.moviesapplication.entity.MoviePoster
+import com.example.moviesapplication.entity.ResponseSearch
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.repository.movies.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,28 +28,15 @@ class DashboardViewModel @Inject constructor(
         return movieRep.getPopularMovies().cachedIn(viewModelScope)
     }
 
-    fun upComingMovies(): LiveData<PagingData<MovieItem>> {
+    fun upComingMovies(): LiveData<PagingData<MoviePoster>> {
         return movieRep.getLatestMovies().cachedIn(viewModelScope)
     }
 
-    private var _searchResult = MutableLiveData<Resource<SearchResponse>>()
-    val searchResult: LiveData<Resource<SearchResponse>> = _searchResult
-
-//
-//    private var _moviesByGenre = MutableLiveData<Resource<ResponseItems>>()
-//    val moviesByGenre: LiveData<Resource<ResponseItems>> = _moviesByGenre
+    private var _searchResult = MutableLiveData<Resource<ResponseSearch>>()
+    val searchResult: LiveData<Resource<ResponseSearch>> = _searchResult
 
     private var _genres = MutableLiveData<Resource<GenreResponse>>()
     val genres: LiveData<Resource<GenreResponse>> = _genres
-
-//    fun getMoviesByGenre() {
-//        viewModelScope.launch {
-//            withContext(Dispatchers.Default) {
-//                val result = movieRep.getPopularMovies()
-//                _moviesByGenre.postValue(result)
-//            }
-//        }
-//    }
 
     fun getGenres() {
         viewModelScope.launch {

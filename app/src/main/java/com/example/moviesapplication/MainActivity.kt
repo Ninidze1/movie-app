@@ -55,6 +55,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.main_auth -> {
                     handleBackPressed(destination)
                 }
+                R.id.singleMovieFragment -> {
+                    handleBackPressed(destination)
+                }
             }
             hideIfAuth(destination, chipNavigation)
         }
@@ -71,6 +74,10 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.navigation_dashboard -> {
                         finish()
+                    }
+                    R.id.singleMovieFragment -> {
+                        navController = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                        navController.navController.navigate(R.id.action_global_navigation_dashboard)
                     }
                 }
             }

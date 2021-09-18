@@ -6,38 +6,43 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapplication.databinding.LatestPosterItemBinding
-import com.example.moviesapplication.entity.MovieItem
+import com.example.moviesapplication.entity.MoviePoster
 import com.example.moviesapplication.extensions.loadImg
 import com.example.moviesapplication.utils.Constants.IMG_DOMAIN
 
-class DashBoardLatestRecyclerAdapter: PagingDataAdapter<MovieItem, DashBoardLatestRecyclerAdapter.ItemHolder>(
+typealias posterClick = (movieId: Int) -> Unit
+class DashBoardLatestRecyclerAdapter: PagingDataAdapter<MoviePoster, DashBoardLatestRecyclerAdapter.ItemHolder>(
     REPO_COMPARATOR
 ) {
-    private val items: MutableList<MovieItem> = mutableListOf()
+    private val items: MutableList<MoviePoster> = mutableListOf()
+    lateinit var onPosterClick: posterClick
 
     companion object {
 
-        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<MovieItem>() {
+        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<MoviePoster>() {
             override fun areItemsTheSame(
-                oldItem: MovieItem,
-                newItem: MovieItem
+                oldItem: MoviePoster,
+                newItem: MoviePoster
             ): Boolean =
                 oldItem == newItem
 
             override fun areContentsTheSame(
-                oldItem: MovieItem,
-                newItem: MovieItem
+                oldItem: MoviePoster,
+                newItem: MoviePoster
             ): Boolean =
                 oldItem.id == newItem.id
         }
     }
 
     inner class ItemHolder(private val binding: LatestPosterItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        private lateinit var model: MovieItem
+        private lateinit var model: MoviePoster
         fun bind() {
             model = getItem(absoluteAdapterPosition)!!
 
             model.posterPath?.let { binding.imageView.loadImg(IMG_DOMAIN + model.posterPath) }
+            binding.root.setOnClickListener {
+                model.id?.let { it1 -> onPosterClick.invoke(it1) }
+            }
         }
 
     }

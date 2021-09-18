@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
+import androidx.paging.filter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
@@ -58,30 +58,32 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
             backToNormal()
         }
 
+        popularAdapter.onMovieClick = { movieId ->
+            putInBundleAndNavigate(movieId, R.id.action_navigation_dashboard_to_singleMovieFragment)
+        }
+
+        upComingAdapter.onPosterClick = { movieId ->
+            putInBundleAndNavigate(movieId, R.id.action_navigation_dashboard_to_singleMovieFragment)
+        }
+
+        searchAdapter.onResultClick = { movieId ->
+            putInBundleAndNavigate(movieId, R.id.action_navigation_dashboard_to_singleMovieFragment)
+        }
+
         genresAdapter.genreClick = { genreId, genre ->
-            findNavController().navigate(R.id.action_navigation_dashboard_to_singleMovieFragment)
 
-//            viewModel.getMoviesByGenre()
-//            binding.popularTv.text = genre
+            viewModel.popularMovies()
+            binding.loadingAnim.show()
 
-//            viewModel.moviesByGenre.observe(viewLifecycleOwner, { data ->
-//                when (data.status) {
-//                    Resource.Status.SUCCESS -> {
-//                        val filteredList = data.data?.movieItems?.filter { it.genreIds?.contains(genreId) == true }
-//                        data.data?.movieItems?.let {
-//                            if (filteredList != null) {
-//                                popularAdapter.addItems(filteredList.toMutableList())
-//                            }
-//                        }
-//                    }
-//                    Resource.Status.ERROR -> {
-//                        d("loadingErroR", "${data.message}")
-//                    }
-//                    Resource.Status.LOADING -> {
-//                        binding.loadingAnim.show()
-//                    }
-//                }
-//            })
+            binding.popularTv.text = genre
+            viewModel.popularMovies().observe(viewLifecycleOwner, { data ->
+
+                lifecycleScope.launch {
+                    binding.loadingAnim.setGone()
+                    val filteredList = data.filter { it.genreIds?.contains(genreId) == true }
+                    popularAdapter.submitData(filteredList)
+                }
+            })
         }
     }
 
@@ -127,7 +129,6 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         viewModel.upComingMovies().observe(viewLifecycleOwner, { data ->
             lifecycleScope.launch {
                 d("dataCheckw", "$data")
-
                 binding.loadingAnim.setGone()
                 upComingAdapter.submitData(data)
             }

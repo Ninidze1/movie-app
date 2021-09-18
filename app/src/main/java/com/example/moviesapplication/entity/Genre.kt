@@ -8,11 +8,6 @@ data class GenreResponse(
     val result: List<Genre>
 )
 
-data class SearchResponse(
-    @SerializedName("results")
-    val results: List<Genre>
-)
-
 data class Genre(
     val id: Int?,
     val name: String?

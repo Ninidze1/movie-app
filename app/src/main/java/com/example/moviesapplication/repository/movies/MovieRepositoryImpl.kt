@@ -7,7 +7,8 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.example.moviesapplication.entity.GenreResponse
 import com.example.moviesapplication.entity.MovieItem
-import com.example.moviesapplication.entity.SearchResponse
+import com.example.moviesapplication.entity.MoviePoster
+import com.example.moviesapplication.entity.ResponseSearch
 import com.example.moviesapplication.network.NetworkService
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.paging.source.LoadPopularMoviesPagingSource
@@ -30,7 +31,7 @@ class MovieRepositoryImpl @Inject constructor(private val apiService: NetworkSer
         ).liveData
     }
 
-    override fun getLatestMovies(): LiveData<PagingData<MovieItem>> {
+    override fun getLatestMovies(): LiveData<PagingData<MoviePoster>> {
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
@@ -40,7 +41,7 @@ class MovieRepositoryImpl @Inject constructor(private val apiService: NetworkSer
         ).liveData
     }
 
-    override fun getSimilarMovies(movieId: Int): LiveData<PagingData<MovieItem>> {
+    override fun getSimilarMovies(movieId: Int): LiveData<PagingData<MoviePoster>> {
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
@@ -76,7 +77,7 @@ class MovieRepositoryImpl @Inject constructor(private val apiService: NetworkSer
         }
     }
 
-    override suspend fun searchMovie(query: String): Resource<SearchResponse> {
+    override suspend fun searchMovie(query: String): Resource<ResponseSearch> {
         return try {
             val response = apiService.searchMovie(
                 query,

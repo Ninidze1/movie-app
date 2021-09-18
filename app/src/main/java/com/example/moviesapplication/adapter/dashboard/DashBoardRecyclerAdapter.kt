@@ -8,12 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapplication.databinding.PosterItemBinding
 import com.example.moviesapplication.entity.MovieItem
 import com.example.moviesapplication.extensions.loadImg
+import com.example.moviesapplication.extensions.titleAdjustForDash
 import com.example.moviesapplication.utils.Constants.IMG_DOMAIN
 
+typealias movieClick = (movieId: Int) -> Unit
 class DashBoardRecyclerAdapter: PagingDataAdapter<MovieItem, DashBoardRecyclerAdapter.ItemHolder>(
     REPO_COMPARATOR
 ) {
     private val items: MutableList<MovieItem> = mutableListOf()
+    lateinit var onMovieClick: movieClick
 
     companion object {
 
@@ -37,6 +40,7 @@ class DashBoardRecyclerAdapter: PagingDataAdapter<MovieItem, DashBoardRecyclerAd
         fun bind() {
             model = getItem(absoluteAdapterPosition)!!
 
+            binding.title.titleAdjustForDash()
             val year = model.releaseDate?.substring(0, 4)
             binding.title.text = model.title
             binding.rating.text = model.voteAverage.toString()
@@ -44,6 +48,10 @@ class DashBoardRecyclerAdapter: PagingDataAdapter<MovieItem, DashBoardRecyclerAd
             if (model.originalLanguage?.isNotEmpty() == true)
                 binding.languageTv.text = model.originalLanguage.toString()
             model.posterPath?.let { binding.imageView.loadImg(IMG_DOMAIN + model.posterPath) }
+
+            binding.root.setOnClickListener {
+                model.id?.let { it1 -> onMovieClick.invoke(it1) }
+            }
         }
 
     }

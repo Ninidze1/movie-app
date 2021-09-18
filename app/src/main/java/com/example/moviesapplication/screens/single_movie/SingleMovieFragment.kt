@@ -30,14 +30,19 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
     private var currentMovieId: Int = -1
 
     override fun init(inflater: LayoutInflater, container: ViewGroup?) {
-        retrieveData(2)
+        retrieveData()
+        similarMovieRecyclerSetup()
 
         listeners()
         observers()
-        similarMovieRecyclerSetup()
+
     }
 
     private fun listeners() {
+        similarAdapter.onPosterClick = { movieId ->
+            putInBundleAndNavigate(movieId, R.id.singleMovieFragment)
+        }
+
         binding.backButton.setOnClickListener {
             findNavController().navigate(R.id.action_singleMovieFragment_to_navigation_dashboard)
         }
@@ -48,6 +53,8 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
             when (data.status) {
                 Resource.Status.SUCCESS -> {
                     data.data?.let { bindData(it) }
+                    viewModel.similarMovies(currentMovieId)
+                    loadSimilarMovies()
                 }
                 Resource.Status.ERROR -> {
                     Log.d("loadingErroR", "${data.message}")
@@ -57,7 +64,9 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
                 }
             }
         })
+    }
 
+    private fun loadSimilarMovies() {
         viewModel.similarMovies(currentMovieId).observe(viewLifecycleOwner, { data ->
             lifecycleScope.launch {
                 similarAdapter.submitData(data)
@@ -79,12 +88,13 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
 
     }
 
-    private fun retrieveData(movieId: Int) {
-        currentMovieId = movieId
+    private fun retrieveData() {
+        val movie = arguments?.get("movieId")
+        if (movie != null) {
+            currentMovieId = movie as Int
 
-        viewModel.getMovieDetails(movieId)
-        viewModel.similarMovies(movieId)
-
+            viewModel.getMovieDetails(currentMovieId)
+        }
     }
 
     private fun similarMovieRecyclerSetup() {
@@ -94,7 +104,5 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.similarRecycler)
     }
-
-
 
 }

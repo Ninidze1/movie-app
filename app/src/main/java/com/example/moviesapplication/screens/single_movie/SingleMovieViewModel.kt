@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.moviesapplication.entity.MovieItem
+import com.example.moviesapplication.entity.MoviePoster
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.repository.movies.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +22,7 @@ class SingleMovieViewModel @Inject constructor(private val movieRep: MovieReposi
     private var _movieDetails = MutableLiveData<Resource<MovieItem>>()
     val movieDetails: LiveData<Resource<MovieItem>> = _movieDetails
 
-    fun similarMovies(movieId: Int): LiveData<PagingData<MovieItem>> {
+    fun similarMovies(movieId: Int): LiveData<PagingData<MoviePoster>> {
         return movieRep.getSimilarMovies(movieId).cachedIn(viewModelScope)
     }
 
@@ -33,4 +34,5 @@ class SingleMovieViewModel @Inject constructor(private val movieRep: MovieReposi
             }
         }
     }
+
 }
