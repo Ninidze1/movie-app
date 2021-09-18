@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
@@ -19,8 +20,10 @@ import com.example.moviesapplication.extensions.setDrawableEnd
 import com.example.moviesapplication.extensions.setGone
 import com.example.moviesapplication.extensions.show
 import com.example.moviesapplication.network.Resource
+import com.example.moviesapplication.paging.loading.LoaderStateAdapter
 import com.example.moviesapplication.repository.firebase.FirebaseRepository
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -49,31 +52,32 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         searchClick()
 
         binding.closeSearchBtn.setOnClickListener {
-            binding.searchRecycler.setGone()
             backToNormal()
         }
 
-        genresAdapter.genreClick = { genre ->
+        genresAdapter.genreClick = { genreId, genre ->
 
-            viewModel.getMoviesByGenre()
-            viewModel.moviesByGenre.observe(viewLifecycleOwner, { data ->
-                when (data.status) {
-                    Resource.Status.SUCCESS -> {
-                        val filteredList = data.data?.movieItems?.filter { it.genreIds?.contains(genre) == true }
-                        data.data?.movieItems?.let {
-                            if (filteredList != null) {
-                                popularAdapter.addItems(filteredList.toMutableList())
-                            }
-                        }
-                    }
-                    Resource.Status.ERROR -> {
-                        d("loadingErroR", "${data.message}")
-                    }
-                    Resource.Status.LOADING -> {
-                        binding.loadingAnim.show()
-                    }
-                }
-            })
+//            viewModel.getMoviesByGenre()
+//            binding.popularTv.text = genre
+
+//            viewModel.moviesByGenre.observe(viewLifecycleOwner, { data ->
+//                when (data.status) {
+//                    Resource.Status.SUCCESS -> {
+//                        val filteredList = data.data?.movieItems?.filter { it.genreIds?.contains(genreId) == true }
+//                        data.data?.movieItems?.let {
+//                            if (filteredList != null) {
+//                                popularAdapter.addItems(filteredList.toMutableList())
+//                            }
+//                        }
+//                    }
+//                    Resource.Status.ERROR -> {
+//                        d("loadingErroR", "${data.message}")
+//                    }
+//                    Resource.Status.LOADING -> {
+//                        binding.loadingAnim.show()
+//                    }
+//                }
+//            })
         }
     }
 
@@ -99,6 +103,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
     }
 
     private fun backToNormal() {
+        binding.searchRecycler.setGone()
         binding.closeSearchBtn.setGone()
 
         binding.searchBar.setDrawableEnd(requireContext(), R.drawable.ic_search)
@@ -107,25 +112,18 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
 
     private fun observers() {
 
-        viewModel.popularMovies.observe(viewLifecycleOwner, { data ->
-            when (data.status) {
-                Resource.Status.SUCCESS -> {
-                    binding.loadingAnim.setGone()
-                    data.data?.movieItems?.let { popularAdapter.addItems(it.toMutableList()) }
-                }
-                Resource.Status.ERROR -> {
-                    d("loadingErroR", "${data.message}")
-                }
-                Resource.Status.LOADING -> {
-                    binding.loadingAnim.show()
-                }
+        viewModel.popularMovies().observe(viewLifecycleOwner, { data ->
+            lifecycleScope.launch {
+                binding.loadingAnim.setGone()
+                d("tagta2g", "$data")
+                popularAdapter.submitData(data)
             }
         })
 
         viewModel.searchResult.observe(viewLifecycleOwner, { data ->
             when (data.status) {
                 Resource.Status.SUCCESS -> {
-                    searchAdapter.notifyItemRangeRemoved(0,searchAdapter.itemCount);
+                    searchAdapter.notifyItemRangeRemoved(0, searchAdapter.itemCount);
                     data.data?.results?.let { searchAdapter.addData(it.toMutableList()) }
                 }
                 Resource.Status.ERROR -> {
@@ -155,7 +153,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
 
     private fun requestMovies() {
         binding.loadingAnim.show()
-        viewModel.getPopularMovies()
+        viewModel.popularMovies()
         viewModel.getGenres()
     }
 
@@ -177,7 +175,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
     private fun popularRecycler() {
         popularAdapter = DashBoardRecyclerAdapter()
         binding.dashboardRecycler.layoutManager = LinearLayoutManager(requireContext())
-        binding.dashboardRecycler.adapter = popularAdapter
+        binding.dashboardRecycler.adapter = popularAdapter.withLoadStateFooter(LoaderStateAdapter())
     }
 
     private fun searchRecycler() {

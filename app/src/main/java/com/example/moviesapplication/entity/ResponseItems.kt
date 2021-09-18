@@ -2,15 +2,16 @@ package com.example.moviesapplication.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponseItems(
-//    @SerializedName("page")
-//    val page: Int?,
+data class ResponseItems<T>(
+
+    @SerializedName("page")
+    val page: Int?,
     @SerializedName("results")
-    val movieItems: List<MovieItem>?,
-//    @SerializedName("total_pages")
-//    val totalPages: Int?,
-//    @SerializedName("total_results")
-//    val totalResults: Int?
+    val results: List<T>,
+    @SerializedName("total_pages")
+    val totalPages: Int?,
+    @SerializedName("total_results")
+    val totalResults: Int?
 )
 
 data class MovieItem(

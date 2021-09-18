@@ -1,6 +1,7 @@
 package com.example.moviesapplication.network
 
 import com.example.moviesapplication.entity.GenreResponse
+import com.example.moviesapplication.entity.MovieItem
 import com.example.moviesapplication.entity.ResponseItems
 import com.example.moviesapplication.entity.SearchResponse
 import com.example.moviesapplication.utils.Constants.API_KEY
@@ -9,17 +10,17 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NetworkService {
+
     @GET("movie/popular?api_key=$API_KEY")
     suspend fun getPopularMovies(
-        @Query("language") language: String,
         @Query("page") page: Int
-    ): Response<ResponseItems>
+    ): Response<ResponseItems<MovieItem>>
 
     @GET("movie/latest?api_key=$API_KEY")
     suspend fun getLatestMovies(
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Response<ResponseItems>
+    ): Response<ResponseItems<MovieItem>>
 
     @GET("search/keyword?api_key=$API_KEY")
     suspend fun searchMovie(

@@ -2,19 +2,38 @@ package com.example.moviesapplication.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapplication.databinding.PosterItemBinding
 import com.example.moviesapplication.entity.MovieItem
 import com.example.moviesapplication.extensions.loadImg
 import com.example.moviesapplication.utils.Constants.IMG_DOMAIN
 
-class DashBoardRecyclerAdapter: RecyclerView.Adapter<DashBoardRecyclerAdapter.ItemHolder>() {
+class DashBoardRecyclerAdapter: PagingDataAdapter<MovieItem, DashBoardRecyclerAdapter.ItemHolder>(REPO_COMPARATOR) {
     private val items: MutableList<MovieItem> = mutableListOf()
+
+    companion object {
+
+        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<MovieItem>() {
+            override fun areItemsTheSame(
+                oldItem: MovieItem,
+                newItem: MovieItem
+            ): Boolean =
+                oldItem == newItem
+
+            override fun areContentsTheSame(
+                oldItem: MovieItem,
+                newItem: MovieItem
+            ): Boolean =
+                oldItem.id == newItem.id
+        }
+    }
 
     inner class ItemHolder(private val binding: PosterItemBinding) : RecyclerView.ViewHolder(binding.root) {
         private lateinit var model: MovieItem
         fun bind() {
-            model = items[absoluteAdapterPosition]
+            model = getItem(absoluteAdapterPosition)!!
 
             val year = model.releaseDate?.substring(0, 4)
             binding.title.text = model.title
@@ -37,10 +56,4 @@ class DashBoardRecyclerAdapter: RecyclerView.Adapter<DashBoardRecyclerAdapter.It
 
     override fun getItemCount(): Int = items.size
 
-    fun addItems(item: MutableList<MovieItem>) {
-        this.items.clear()
-        this.items.addAll(item)
-        notifyItemRangeRemoved(0, item.size);
-        notifyItemRangeChanged(0, item.size)
-    }
 }

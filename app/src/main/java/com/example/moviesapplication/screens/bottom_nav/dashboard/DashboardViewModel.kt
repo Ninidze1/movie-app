@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.moviesapplication.entity.GenreResponse
-import com.example.moviesapplication.entity.ResponseItems
+import com.example.moviesapplication.entity.MovieItem
 import com.example.moviesapplication.entity.SearchResponse
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.repository.movies.MovieRepository
@@ -21,35 +23,37 @@ class DashboardViewModel @Inject constructor(
     private val movieRep: MovieRepository
     ) : ViewModel() {
 
-    private var _popularMovies = MutableLiveData<Resource<ResponseItems>>()
-    val popularMovies: LiveData<Resource<ResponseItems>> = _popularMovies
+    fun popularMovies(): LiveData<PagingData<MovieItem>> {
+        return movieRep.getPopularMovies().cachedIn(viewModelScope)
+    }
 
     private var _searchResult = MutableLiveData<Resource<SearchResponse>>()
     val searchResult: LiveData<Resource<SearchResponse>> = _searchResult
 
-    private var _moviesByGenre = MutableLiveData<Resource<ResponseItems>>()
-    val moviesByGenre: LiveData<Resource<ResponseItems>> = _moviesByGenre
+//
+//    private var _moviesByGenre = MutableLiveData<Resource<ResponseItems>>()
+//    val moviesByGenre: LiveData<Resource<ResponseItems>> = _moviesByGenre
 
     private var _genres = MutableLiveData<Resource<GenreResponse>>()
     val genres: LiveData<Resource<GenreResponse>> = _genres
 
-    fun getPopularMovies() {
-        viewModelScope.launch {
-            withContext(Dispatchers.Default) {
-                val result = movieRep.getPopularMovies()
-                _popularMovies.postValue(result)
-            }
-        }
-    }
+//    fun getPopularMovies() {
+//        viewModelScope.launch {
+//            withContext(Dispatchers.Default) {
+//                val result = movieRep.getPopularMovies()
+//                _popularMovies.postValue(result)
+//            }
+//        }
+//    }
 
-    fun getMoviesByGenre() {
-        viewModelScope.launch {
-            withContext(Dispatchers.Default) {
-                val result = movieRep.getPopularMovies()
-                _moviesByGenre.postValue(result)
-            }
-        }
-    }
+//    fun getMoviesByGenre() {
+//        viewModelScope.launch {
+//            withContext(Dispatchers.Default) {
+//                val result = movieRep.getPopularMovies()
+//                _moviesByGenre.postValue(result)
+//            }
+//        }
+//    }
 
     fun getGenres() {
         viewModelScope.launch {
