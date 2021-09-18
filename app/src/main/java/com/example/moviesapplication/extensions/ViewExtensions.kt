@@ -29,6 +29,12 @@ fun ImageView.loadImg(url: String) {
 
 }
 
+fun View.showIf(state: Boolean) {
+    if (state)
+        show()
+    else
+        setGone()
+}
 
 //fun View.slideDown(duration: Int = 400) {
 //    show()

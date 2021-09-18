@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
@@ -58,6 +59,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         }
 
         genresAdapter.genreClick = { genreId, genre ->
+            findNavController().navigate(R.id.action_navigation_dashboard_to_singleMovieFragment)
 
 //            viewModel.getMoviesByGenre()
 //            binding.popularTv.text = genre

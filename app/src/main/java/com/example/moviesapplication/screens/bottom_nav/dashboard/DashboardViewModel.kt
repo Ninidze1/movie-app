@@ -31,7 +31,6 @@ class DashboardViewModel @Inject constructor(
         return movieRep.getLatestMovies().cachedIn(viewModelScope)
     }
 
-
     private var _searchResult = MutableLiveData<Resource<SearchResponse>>()
     val searchResult: LiveData<Resource<SearchResponse>> = _searchResult
 

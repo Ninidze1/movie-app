@@ -9,17 +9,29 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.moviesapplication.screens.bottom_nav.dashboard.DashboardFragment"
         android:label="dashboard_fragment"
-        tools:layout="@layout/dashboard_fragment" />
+        tools:layout="@layout/dashboard_fragment" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_singleMovieFragment"
+            app:destination="@id/singleMovieFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_favourites"
         android:name="com.example.moviesapplication.screens.bottom_nav.favourites.FavouritesFragment"
         android:label="moviedetails_fragment"
-        tools:layout="@layout/favourites_fragment" />
+        tools:layout="@layout/favourites_fragment" >
+        <action
+            android:id="@+id/action_navigation_favourites_to_singleMovieFragment"
+            app:destination="@id/singleMovieFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.moviesapplication.screens.bottom_nav.profile.ProfileFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_navigation_profile_to_singleMovieFragment"
+            app:destination="@id/singleMovieFragment" />
+    </fragment>
     <fragment
         android:id="@+id/main_auth"
         android:name="com.example.moviesapplication.screens.auth.AuthFragment"
@@ -34,4 +46,25 @@
         app:popExitAnim="@anim/slide_out_top"
         app:popUpTo="@id/main_navigation"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/singleMovieFragment"
+        android:name="com.example.moviesapplication.screens.single_movie.SingleMovieFragment"
+        android:label="single_movie_fragment"
+        tools:layout="@layout/single_movie_fragment" >
+        <action
+            android:id="@+id/action_singleMovieFragment_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard"
+            app:popUpTo="@id/main_navigation"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_singleMovieFragment_to_navigation_favourites"
+            app:destination="@id/navigation_favourites"
+            app:popUpTo="@id/main_navigation"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_singleMovieFragment_to_navigation_profile"
+            app:destination="@id/navigation_profile"
+            app:popUpTo="@id/main_navigation"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

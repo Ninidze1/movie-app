@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideIfAuth(destination: NavDestination, navBar: ChipNavigationBar) {
-        if (destination.id == R.id.main_auth)
+        if (destination.id == R.id.main_auth || destination.id == R.id.singleMovieFragment)
             navBar.setGone()
         else {
             navBar.show()

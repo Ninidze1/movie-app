@@ -10,7 +10,9 @@ import com.example.moviesapplication.network.Resource
 interface MovieRepository {
     fun getPopularMovies(): LiveData<PagingData<MovieItem>>
     fun getLatestMovies(): LiveData<PagingData<MovieItem>>
+    fun getSimilarMovies(movieId: Int): LiveData<PagingData<MovieItem>>
 
     suspend fun getGenres(): Resource<GenreResponse>
+    suspend fun getMovieDetails(movieId: Int): Resource<MovieItem>
     suspend fun searchMovie(query: String): Resource<SearchResponse>
 }
