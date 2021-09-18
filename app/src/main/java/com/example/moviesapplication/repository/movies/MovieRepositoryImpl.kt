@@ -10,7 +10,8 @@ import com.example.moviesapplication.entity.MovieItem
 import com.example.moviesapplication.entity.SearchResponse
 import com.example.moviesapplication.network.NetworkService
 import com.example.moviesapplication.network.Resource
-import com.example.moviesapplication.paging.source.LoadMoviesPagingSource
+import com.example.moviesapplication.paging.source.LoadPopularMoviesPagingSource
+import com.example.moviesapplication.paging.source.UpComingMoviesPagingSource
 import com.example.moviesapplication.utils.Constants.LANG_ENG
 import com.example.moviesapplication.utils.Constants.NETWORK_PAGE_SIZE
 import javax.inject.Inject
@@ -23,7 +24,7 @@ class MovieRepositoryImpl @Inject constructor(private val apiService: NetworkSer
                 pageSize = NETWORK_PAGE_SIZE,
                 enablePlaceholders = true,
             ),
-            pagingSourceFactory = { LoadMoviesPagingSource(apiService) }
+            pagingSourceFactory = { LoadPopularMoviesPagingSource(apiService) }
         ).liveData
     }
 
@@ -33,7 +34,7 @@ class MovieRepositoryImpl @Inject constructor(private val apiService: NetworkSer
                 pageSize = NETWORK_PAGE_SIZE,
                 enablePlaceholders = true
             ),
-            pagingSourceFactory = { LoadMoviesPagingSource(apiService) }
+            pagingSourceFactory = { UpComingMoviesPagingSource(apiService) }
         ).liveData
     }
 

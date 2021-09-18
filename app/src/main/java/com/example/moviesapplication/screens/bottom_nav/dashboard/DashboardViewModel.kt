@@ -27,6 +27,11 @@ class DashboardViewModel @Inject constructor(
         return movieRep.getPopularMovies().cachedIn(viewModelScope)
     }
 
+    fun upComingMovies(): LiveData<PagingData<MovieItem>> {
+        return movieRep.getLatestMovies().cachedIn(viewModelScope)
+    }
+
+
     private var _searchResult = MutableLiveData<Resource<SearchResponse>>()
     val searchResult: LiveData<Resource<SearchResponse>> = _searchResult
 
@@ -36,15 +41,6 @@ class DashboardViewModel @Inject constructor(
 
     private var _genres = MutableLiveData<Resource<GenreResponse>>()
     val genres: LiveData<Resource<GenreResponse>> = _genres
-
-//    fun getPopularMovies() {
-//        viewModelScope.launch {
-//            withContext(Dispatchers.Default) {
-//                val result = movieRep.getPopularMovies()
-//                _popularMovies.postValue(result)
-//            }
-//        }
-//    }
 
 //    fun getMoviesByGenre() {
 //        viewModelScope.launch {

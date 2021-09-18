@@ -1,4 +1,4 @@
-package com.example.moviesapplication.adapter
+package com.example.moviesapplication.adapter.dashboard
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,9 @@ import com.example.moviesapplication.entity.MovieItem
 import com.example.moviesapplication.extensions.loadImg
 import com.example.moviesapplication.utils.Constants.IMG_DOMAIN
 
-class DashBoardRecyclerAdapter: PagingDataAdapter<MovieItem, DashBoardRecyclerAdapter.ItemHolder>(REPO_COMPARATOR) {
+class DashBoardRecyclerAdapter: PagingDataAdapter<MovieItem, DashBoardRecyclerAdapter.ItemHolder>(
+    REPO_COMPARATOR
+) {
     private val items: MutableList<MovieItem> = mutableListOf()
 
     companion object {

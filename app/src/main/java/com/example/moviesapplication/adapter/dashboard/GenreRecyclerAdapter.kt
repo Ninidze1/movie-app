@@ -1,4 +1,4 @@
-package com.example.moviesapplication.adapter
+package com.example.moviesapplication.adapter.dashboard
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

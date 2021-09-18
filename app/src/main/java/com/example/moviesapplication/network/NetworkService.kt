@@ -16,9 +16,8 @@ interface NetworkService {
         @Query("page") page: Int
     ): Response<ResponseItems<MovieItem>>
 
-    @GET("movie/latest?api_key=$API_KEY")
-    suspend fun getLatestMovies(
-        @Query("language") language: String,
+    @GET("movie/upcoming?api_key=$API_KEY")
+    suspend fun getUpComingMovies(
         @Query("page") page: Int
     ): Response<ResponseItems<MovieItem>>
 

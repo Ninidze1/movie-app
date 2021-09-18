@@ -9,9 +9,7 @@ import com.example.moviesapplication.utils.Constants.STARTING_PAGE_INDEX
 import retrofit2.HttpException
 import java.io.IOException
 
-
-
-class LoadMoviesPagingSource(
+class UpComingMoviesPagingSource(
     private val apiService: NetworkService
 ) :
     PagingSource<Int, MovieItem>() {
@@ -25,8 +23,9 @@ class LoadMoviesPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieItem> {
         val position = params.key ?: STARTING_PAGE_INDEX
         return try {
-            val response = apiService.getPopularMovies(position)
+            val response = apiService.getUpComingMovies(position)
             val data = response.body()!!
+            d("dataCheck", "$data")
 
             LoadResult.Page(
                 data = data.results,

@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.example.moviesapplication.R
-import com.example.moviesapplication.adapter.DashBoardRecyclerAdapter
-import com.example.moviesapplication.adapter.GenreRecyclerAdapter
-import com.example.moviesapplication.adapter.SearchRecyclerViewAdapter
+import com.example.moviesapplication.adapter.dashboard.DashBoardLatestRecyclerAdapter
+import com.example.moviesapplication.adapter.dashboard.DashBoardRecyclerAdapter
+import com.example.moviesapplication.adapter.dashboard.GenreRecyclerAdapter
+import com.example.moviesapplication.adapter.dashboard.SearchRecyclerViewAdapter
 import com.example.moviesapplication.base.BaseFragment
 import com.example.moviesapplication.databinding.DashboardFragmentBinding
 import com.example.moviesapplication.extensions.removeDrawableEnd
@@ -38,6 +39,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
     private lateinit var popularAdapter: DashBoardRecyclerAdapter
     private lateinit var genresAdapter: GenreRecyclerAdapter
     private lateinit var searchAdapter: SearchRecyclerViewAdapter
+    private lateinit var upComingAdapter: DashBoardLatestRecyclerAdapter
 
     private lateinit var snapHelper: SnapHelper
 
@@ -120,6 +122,15 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
             }
         })
 
+        viewModel.upComingMovies().observe(viewLifecycleOwner, { data ->
+            lifecycleScope.launch {
+                d("dataCheckw", "$data")
+
+                binding.loadingAnim.setGone()
+                upComingAdapter.submitData(data)
+            }
+        })
+
         viewModel.searchResult.observe(viewLifecycleOwner, { data ->
             when (data.status) {
                 Resource.Status.SUCCESS -> {
@@ -153,6 +164,8 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
 
     private fun requestMovies() {
         binding.loadingAnim.show()
+
+        viewModel.upComingMovies()
         viewModel.popularMovies()
         viewModel.getGenres()
     }
@@ -162,14 +175,20 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         popularRecycler()
         genresRecycler()
         searchRecycler()
+        upComingRecycler()
     }
 
     private fun genresRecycler() {
-
         genresAdapter = GenreRecyclerAdapter()
         binding.genre.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.genre.adapter = genresAdapter
         snapHelper.attachToRecyclerView(binding.genre)
+    }
+    private fun upComingRecycler() {
+        upComingAdapter = DashBoardLatestRecyclerAdapter()
+        binding.futureRecylcer.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.futureRecylcer.adapter = upComingAdapter.withLoadStateFooter(LoaderStateAdapter())
+        snapHelper.attachToRecyclerView(binding.futureRecylcer)
     }
 
     private fun popularRecycler() {
