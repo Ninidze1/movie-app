@@ -1,42 +1,54 @@
 package com.example.moviesapplication.screens.single_movie
 
 import android.util.Log
+import android.util.Log.d
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.moviesapplication.R
+import com.example.moviesapplication.adapter.dashboard.CastRecyclerAdapter
 import com.example.moviesapplication.adapter.dashboard.DashBoardLatestRecyclerAdapter
 import com.example.moviesapplication.base.BaseFragment
 import com.example.moviesapplication.databinding.SingleMovieFragmentBinding
 import com.example.moviesapplication.entity.MovieItem
-import com.example.moviesapplication.extensions.blurImg
-import com.example.moviesapplication.extensions.loadImg
-import com.example.moviesapplication.extensions.showIf
-import com.example.moviesapplication.extensions.titleAdjust
+import com.example.moviesapplication.extensions.*
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.paging.loading.LoaderStateAdapter
 import com.example.moviesapplication.utils.Constants.IMG_DOMAIN
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
+
 
 @AndroidEntryPoint
 class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovieViewModel>(
     SingleMovieFragmentBinding::inflate,
     SingleMovieViewModel::class.java
 ) {
+
     private lateinit var similarAdapter: DashBoardLatestRecyclerAdapter
+    private lateinit var castAdapter: CastRecyclerAdapter
+
     private var currentMovieId: Int = -1
 
     override fun init(inflater: LayoutInflater, container: ViewGroup?) {
         retrieveData()
-        similarMovieRecyclerSetup()
+        setUpRecyclerViews()
 
         listeners()
         observers()
 
+    }
+
+    private fun setUpRecyclerViews() {
+        val snapHelper = LinearSnapHelper()
+        similarMovieRecyclerSetup(snapHelper)
+        castRecyclerSetup(snapHelper)
     }
 
     private fun listeners() {
@@ -55,11 +67,29 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
                 Resource.Status.SUCCESS -> {
                     data.data?.let { bindData(it) }
                     viewModel.similarMovies(currentMovieId)
+                    viewModel.getMovieActors(currentMovieId)
+
                     loadSimilarMovies()
                 }
                 Resource.Status.ERROR -> {
                     Log.d("loadingErroR", "${data.message}")
 
+                }
+                Resource.Status.LOADING -> {
+                }
+            }
+        })
+
+        viewModel.movieCast.observe(viewLifecycleOwner, { data ->
+            when (data.status) {
+                Resource.Status.SUCCESS -> {
+                    data.data?.cast?.let {
+                        d("tagtag", "${data.data}")
+                        castAdapter.addItems(it.toMutableList())
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    Log.d("loadingError", "${data.message}")
                 }
                 Resource.Status.LOADING -> {
                 }
@@ -85,11 +115,44 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
         binding.posterImg.loadImg(IMG_DOMAIN + data.posterPath.toString())
 
         binding.backgroundPoster.loadImg(IMG_DOMAIN + data.backdropPath.toString())
-        binding.backgroundPoster.blurImg(requireContext(), binding.backgroundPoster, binding.shimmerLayout)
+        binding.backgroundPoster.blurImg(binding.shimmerLayout)
+        binding.backgroundPoster.blurImg(binding.shimmerPosterLayout)
 
         data.adult?.let { binding.ageLimit.showIf(it) }
         binding.titleTv.titleAdjust()
 
+        binding.imdbTv.text = data.voteAverage.toString()
+        data.voteAverage?.let { rating ->
+            displayStarts(rating)
+        }
+
+    }
+
+    private fun displayStarts(votes: Double) {
+        val stars = (votes.roundToInt() / 2)
+        val starList = mutableListOf<AppCompatImageView>()
+
+        createStarView(stars, starList)
+        starList.createConstraint(
+            binding.imdbTv,
+            binding.mainRoot
+        )
+    }
+
+    private fun createStarView(
+        stars: Int,
+        starList: MutableList<AppCompatImageView>
+    ) {
+        for (each in 1..stars) {
+            val newStar = AppCompatImageView(requireContext())
+            newStar.id = View.generateViewId()
+            binding.mainRoot.addView(newStar)
+            starList.add(newStar)
+
+            newStar.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            newStar.layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
+            newStar.setImageResource(R.drawable.ic_fav)
+        }
     }
 
     private fun retrieveData() {
@@ -101,12 +164,20 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
         }
     }
 
-    private fun similarMovieRecyclerSetup() {
+    private fun similarMovieRecyclerSetup(snapHelper: LinearSnapHelper) {
         similarAdapter = DashBoardLatestRecyclerAdapter()
-        binding.similarRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.similarRecycler.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.similarRecycler.adapter = similarAdapter.withLoadStateFooter(LoaderStateAdapter())
-        val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.similarRecycler)
+    }
+
+    private fun castRecyclerSetup(snapHelper: LinearSnapHelper) {
+        castAdapter = CastRecyclerAdapter()
+        binding.actorsRecycler.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.actorsRecycler.adapter = castAdapter
+        snapHelper.attachToRecyclerView(binding.actorsRecycler)
     }
 
 }

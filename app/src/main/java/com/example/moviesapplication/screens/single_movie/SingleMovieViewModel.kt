@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.moviesapplication.entity.CastItem
 import com.example.moviesapplication.entity.MovieItem
 import com.example.moviesapplication.entity.MoviePoster
 import com.example.moviesapplication.network.Resource
@@ -22,6 +23,9 @@ class SingleMovieViewModel @Inject constructor(private val movieRep: MovieReposi
     private var _movieDetails = MutableLiveData<Resource<MovieItem>>()
     val movieDetails: LiveData<Resource<MovieItem>> = _movieDetails
 
+    private var _movieCast = MutableLiveData<Resource<CastItem>>()
+    val movieCast: LiveData<Resource<CastItem>> = _movieCast
+
     fun similarMovies(movieId: Int): LiveData<PagingData<MoviePoster>> {
         return movieRep.getSimilarMovies(movieId).cachedIn(viewModelScope)
     }
@@ -31,6 +35,15 @@ class SingleMovieViewModel @Inject constructor(private val movieRep: MovieReposi
             withContext(Dispatchers.Default) {
                 val result = movieRep.getMovieDetails(movieId)
                 _movieDetails.postValue(result)
+            }
+        }
+    }
+
+    fun getMovieActors(movieId: Int) {
+        viewModelScope.launch {
+            withContext(Dispatchers.Default) {
+                val result = movieRep.getActors(movieId)
+                _movieCast.postValue(result)
             }
         }
     }

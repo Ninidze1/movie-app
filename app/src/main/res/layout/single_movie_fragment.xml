@@ -10,14 +10,27 @@
     tools:context=".screens.single_movie.SingleMovieFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".screens.single_movie.SingleMovieFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/actorsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/castTv" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/backgroundPoster"
             android:layout_width="match_parent"
             android:layout_height="250dp"
+            android:foreground="@drawable/foreground_gradient"
             android:background="@color/gray_blue"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,12 +51,13 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:background="@color/gray_blue"
+                android:background="@color/gray"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/ic_launcher_foreground" />
+
         </com.facebook.shimmer.ShimmerFrameLayout>
 
         <androidx.constraintlayout.widget.Guideline
@@ -61,7 +75,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             app:cardCornerRadius="18dp"
-            app:cardElevation="45dp"
+            app:cardElevation="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/backgroundPoster"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/backgroundPoster">
@@ -75,6 +89,54 @@
                 tools:src="@drawable/ic_launcher_background" />
 
         </androidx.cardview.widget.CardView>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerPosterLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="500dp"
+            app:shimmer_duration="700"
+            app:layout_constraintBottom_toBottomOf="@+id/cardView"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="@+id/cardView">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="45dp"
+                app:layout_constraintBottom_toBottomOf="@+id/backgroundPoster"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/backgroundPoster">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:scaleType="centerCrop" />
+
+
+            </androidx.cardview.widget.CardView>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <TextView
+            android:id="@+id/imdbTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/placeholder_shape"
+            android:fontFamily="@font/proxima_extra_bold"
+            android:paddingStart="12dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="3dp"
+            android:text="7.2"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/backgroundPoster"
+            app:layout_constraintStart_toStartOf="@+id/titleTv" />
 
         <TextView
             android:id="@+id/titleTv"
@@ -163,15 +225,27 @@
             android:textColor="@color/white"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="@+id/descriptionTitle"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
+            app:layout_constraintTop_toBottomOf="@id/separator2" />
+
+        <TextView
+            android:id="@+id/castTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/proxima_black"
+            android:text="@string/actors"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="@+id/descriptionTitle"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionTv" />
 
         <View
-            android:id="@+id/view2"
+            android:id="@+id/separator2"
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="10dp"
             android:background="@color/secondary_color"
-            app:layout_constraintTop_toBottomOf="@id/descriptionTv" />
+            app:layout_constraintTop_toBottomOf="@+id/actorsRecycler" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/similarRecycler"
@@ -181,6 +255,8 @@
             android:layout_marginBottom="20dp"
             android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/similarTv" />
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -190,7 +266,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:elevation="50dp"
-            android:background="@drawable/item_shape"
+            android:background="@drawable/placeholder_shape"
             android:padding="8dp"
             android:src="@drawable/ic_fav_passive"
             app:layout_constraintEnd_toEndOf="parent"
@@ -207,7 +283,6 @@
             android:src="@drawable/ic_previous"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

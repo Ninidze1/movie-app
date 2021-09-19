@@ -25,6 +25,11 @@ interface NetworkService {
         @Query("page") page: Int
     ): Response<ResponseItems<MoviePoster>>
 
+    @GET("movie/{movie_id}/credits?api_key=$API_KEY")
+    suspend fun getActors(
+        @Path("movie_id") movie_id: Int
+        ): Response<CastItem>
+
     @GET("movie/{movie_id}?api_key=$API_KEY")
     suspend fun getMovieDetails(@Path("movie_id") movie_id: Int): Response<MovieItem>
 

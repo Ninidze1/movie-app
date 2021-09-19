@@ -13,16 +13,21 @@ import com.example.moviesapplication.entity.ResponseSearch
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.repository.movies.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
     private val movieRep: MovieRepository
     ) : ViewModel() {
+
+    var job: Job? = null
+
+    private var _searchResult = MutableLiveData<Resource<ResponseSearch>>()
+    val searchResult: LiveData<Resource<ResponseSearch>> = _searchResult
+
+    private var _genres = MutableLiveData<Resource<GenreResponse>>()
+    val genres: LiveData<Resource<GenreResponse>> = _genres
 
     fun popularMovies(): LiveData<PagingData<MovieItem>> {
         return movieRep.getPopularMovies().cachedIn(viewModelScope)
@@ -31,12 +36,6 @@ class DashboardViewModel @Inject constructor(
     fun upComingMovies(): LiveData<PagingData<MoviePoster>> {
         return movieRep.getLatestMovies().cachedIn(viewModelScope)
     }
-
-    private var _searchResult = MutableLiveData<Resource<ResponseSearch>>()
-    val searchResult: LiveData<Resource<ResponseSearch>> = _searchResult
-
-    private var _genres = MutableLiveData<Resource<GenreResponse>>()
-    val genres: LiveData<Resource<GenreResponse>> = _genres
 
     fun getGenres() {
         viewModelScope.launch {
@@ -48,7 +47,8 @@ class DashboardViewModel @Inject constructor(
     }
 
     fun searchMovie(query: String) {
-        viewModelScope.launch {
+        job?.cancel()
+        job = viewModelScope.launch {
             withContext(Dispatchers.Default) {
                 val result = movieRep.searchMovie(query)
                 delay(500)
