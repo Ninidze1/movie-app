@@ -12,6 +12,7 @@ import com.example.moviesapplication.adapter.dashboard.DashBoardLatestRecyclerAd
 import com.example.moviesapplication.base.BaseFragment
 import com.example.moviesapplication.databinding.SingleMovieFragmentBinding
 import com.example.moviesapplication.entity.MovieItem
+import com.example.moviesapplication.extensions.blurImg
 import com.example.moviesapplication.extensions.loadImg
 import com.example.moviesapplication.extensions.showIf
 import com.example.moviesapplication.extensions.titleAdjust
@@ -75,13 +76,16 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
     }
 
     private fun bindData(data: MovieItem) {
+
         binding.titleTv.text = data.title.toString()
         binding.languageTv2.text = data.originalLanguage.toString()
         binding.yearTv2.text = data.releaseDate?.substring(0, 4) ?: "Error"
         binding.descriptionTv.text = data.overview.toString()
 
         binding.posterImg.loadImg(IMG_DOMAIN + data.posterPath.toString())
+
         binding.backgroundPoster.loadImg(IMG_DOMAIN + data.backdropPath.toString())
+        binding.backgroundPoster.blurImg(requireContext(), binding.backgroundPoster, binding.shimmerLayout)
 
         data.adult?.let { binding.ageLimit.showIf(it) }
         binding.titleTv.titleAdjust()

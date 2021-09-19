@@ -45,6 +45,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
     private lateinit var snapHelper: SnapHelper
 
     override fun init(inflater: LayoutInflater, container: ViewGroup?) {
+
         requestMovies()
         recyclerSetup()
         observers()
@@ -71,15 +72,14 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         }
 
         genresAdapter.genreClick = { genreId, genre ->
+            binding.root.smoothScrollBy(0, 1400)
 
             viewModel.popularMovies()
-            binding.loadingAnim.show()
 
             binding.popularTv.text = genre
             viewModel.popularMovies().observe(viewLifecycleOwner, { data ->
 
                 lifecycleScope.launch {
-                    binding.loadingAnim.setGone()
                     val filteredList = data.filter { it.genreIds?.contains(genreId) == true }
                     popularAdapter.submitData(filteredList)
                 }
@@ -109,6 +109,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
     }
 
     private fun backToNormal() {
+        binding.searchBar.text?.clear()
         binding.searchRecycler.setGone()
         binding.closeSearchBtn.setGone()
 
@@ -120,7 +121,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
 
         viewModel.popularMovies().observe(viewLifecycleOwner, { data ->
             lifecycleScope.launch {
-                binding.loadingAnim.setGone()
+
                 d("tagta2g", "$data")
                 popularAdapter.submitData(data)
             }
@@ -129,7 +130,6 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         viewModel.upComingMovies().observe(viewLifecycleOwner, { data ->
             lifecycleScope.launch {
                 d("dataCheckw", "$data")
-                binding.loadingAnim.setGone()
                 upComingAdapter.submitData(data)
             }
         })
@@ -137,14 +137,13 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         viewModel.searchResult.observe(viewLifecycleOwner, { data ->
             when (data.status) {
                 Resource.Status.SUCCESS -> {
-                    searchAdapter.notifyItemRangeRemoved(0, searchAdapter.itemCount);
+                    searchAdapter.notifyItemRangeRemoved(0, searchAdapter.itemCount)
                     data.data?.results?.let { searchAdapter.addData(it.toMutableList()) }
                 }
                 Resource.Status.ERROR -> {
                     d("loadingErroR", "${data.message}")
                 }
                 Resource.Status.LOADING -> {
-                    binding.loadingAnim.show()
                 }
             }
         })
@@ -166,7 +165,6 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
     }
 
     private fun requestMovies() {
-        binding.loadingAnim.show()
 
         viewModel.upComingMovies()
         viewModel.popularMovies()

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:scrollbars="none"
     android:layout_height="wrap_content"
     android:background="@color/secondary_color"
     android:overScrollMode="never"
@@ -40,16 +41,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/genre" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dashboardRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/popularTv" />
-
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/search_bar"
             android:layout_width="0dp"
@@ -71,19 +62,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/loadingAnim"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/dashboardRecycler"
-            app:layout_constraintTop_toTopOf="@+id/dashboardRecycler"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/anim_loading" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/genre"
@@ -120,6 +98,16 @@
             app:layout_constraintEnd_toEndOf="@+id/search_bar"
             app:layout_constraintTop_toTopOf="@+id/search_bar" />
 
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dashboardRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/popularTv" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/futureRecylcer"
             android:layout_width="409dp"
@@ -130,6 +118,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/upComingTv" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

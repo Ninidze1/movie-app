@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:overScrollMode="never"
+    android:scrollbars="none"
     android:background="@color/secondary_color_tale"
     android:layout_height="match_parent"
     tools:context=".screens.single_movie.SingleMovieFragment">
@@ -22,6 +24,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_launcher_foreground" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:shimmer_auto_start="true"
+            app:shimmer_tilt="20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@color/gray_blue"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_launcher_foreground" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"
@@ -72,7 +95,7 @@
             android:id="@+id/languageTv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="7dp"
             android:drawablePadding="10dp"
             android:fontFamily="@font/montera_regular"
             android:textColor="@color/white"

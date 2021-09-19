@@ -36,11 +36,3 @@ fun View.showIf(state: Boolean) {
         setGone()
 }
 
-//fun View.slideDown(duration: Int = 400) {
-//    show()
-//    val animate = TranslateAnimation(0f, 0f, 0f, this.height.toFloat())
-//    animate.duration = duration.toLong()
-//    animate.fillAfter = true
-//    startAnimation(animate)
-//    setGone()
-//}

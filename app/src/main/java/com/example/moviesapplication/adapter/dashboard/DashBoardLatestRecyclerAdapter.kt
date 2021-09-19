@@ -40,6 +40,7 @@ class DashBoardLatestRecyclerAdapter: PagingDataAdapter<MoviePoster, DashBoardLa
             model = getItem(absoluteAdapterPosition)!!
 
             model.posterPath?.let { binding.imageView.loadImg(IMG_DOMAIN + model.posterPath) }
+
             binding.root.setOnClickListener {
                 model.id?.let { it1 -> onPosterClick.invoke(it1) }
             }

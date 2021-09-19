@@ -12,7 +12,11 @@
         tools:layout="@layout/dashboard_fragment" >
         <action
             android:id="@+id/action_navigation_dashboard_to_singleMovieFragment"
-            app:destination="@id/singleMovieFragment" />
+            app:destination="@id/singleMovieFragment"
+            app:enterAnim="@anim/slide_in_bot"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bot" />
     </fragment>
     <fragment
         android:id="@+id/navigation_favourites"
@@ -21,7 +25,11 @@
         tools:layout="@layout/favourites_fragment" >
         <action
             android:id="@+id/action_navigation_favourites_to_singleMovieFragment"
-            app:destination="@id/singleMovieFragment" />
+            app:destination="@id/singleMovieFragment"
+            app:enterAnim="@anim/slide_in_bot"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bot" />
     </fragment>
     <fragment
         android:id="@+id/navigation_profile"
@@ -30,7 +38,11 @@
         tools:layout="@layout/profile_fragment" >
         <action
             android:id="@+id/action_navigation_profile_to_singleMovieFragment"
-            app:destination="@id/singleMovieFragment" />
+            app:destination="@id/singleMovieFragment"
+            app:enterAnim="@anim/slide_in_bot"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bot" />
     </fragment>
     <fragment
         android:id="@+id/main_auth"
@@ -55,16 +67,20 @@
             android:id="@+id/action_singleMovieFragment_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard"
             app:popUpTo="@id/main_navigation"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bot"
+            app:popEnterAnim="@anim/slide_in_bot"
+            app:popExitAnim="@anim/slide_out_top" />
         <action
             android:id="@+id/action_singleMovieFragment_to_navigation_favourites"
             app:destination="@id/navigation_favourites"
             app:popUpTo="@id/main_navigation"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_singleMovieFragment_to_navigation_profile"
-            app:destination="@id/navigation_profile"
-            app:popUpTo="@id/main_navigation"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_bot"
+            app:popEnterAnim="@anim/slide_in_bot"
+            app:popExitAnim="@anim/slide_out_top" />
+
     </fragment>
 </navigation>
