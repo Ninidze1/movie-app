@@ -2,7 +2,11 @@ package com.example.moviesapplication.repository.movies
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
-import com.example.moviesapplication.entity.*
+import com.example.moviesapplication.entity.dashboard.GenreResponse
+import com.example.moviesapplication.entity.dashboard.MovieItem
+import com.example.moviesapplication.entity.dashboard.MoviePoster
+import com.example.moviesapplication.entity.dashboard.ResponseSearch
+import com.example.moviesapplication.entity.detail.CastItem
 import com.example.moviesapplication.network.Resource
 
 interface MovieRepository {

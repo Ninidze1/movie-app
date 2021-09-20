@@ -11,17 +11,22 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.example.moviesapplication.R
-import com.example.moviesapplication.adapter.dashboard.CastRecyclerAdapter
 import com.example.moviesapplication.adapter.dashboard.DashBoardLatestRecyclerAdapter
+import com.example.moviesapplication.adapter.details.CastRecyclerAdapter
 import com.example.moviesapplication.base.BaseFragment
 import com.example.moviesapplication.databinding.SingleMovieFragmentBinding
-import com.example.moviesapplication.entity.MovieItem
+import com.example.moviesapplication.entity.dashboard.MovieItem
+import com.example.moviesapplication.entity.person.FavMovie
 import com.example.moviesapplication.extensions.*
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.paging.loading.LoaderStateAdapter
 import com.example.moviesapplication.utils.Constants.IMG_DOMAIN
+import com.example.moviesapplication.utils.Constants.MOVIE_ID
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.math.roundToInt
 
 
@@ -33,6 +38,8 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
 
     private lateinit var similarAdapter: DashBoardLatestRecyclerAdapter
     private lateinit var castAdapter: CastRecyclerAdapter
+
+    private var isFav = false
 
     private var currentMovieId: Int = -1
 
@@ -53,12 +60,13 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
 
     private fun listeners() {
         similarAdapter.onPosterClick = { movieId ->
-            putInBundleAndNavigate(movieId, R.id.singleMovieFragment)
+            putInBundleAndNavigate(MOVIE_ID, movieId, R.id.singleMovieFragment)
         }
 
         binding.backButton.setOnClickListener {
             findNavController().navigate(R.id.action_singleMovieFragment_to_navigation_dashboard)
         }
+
     }
 
     private fun observers() {
@@ -106,10 +114,45 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
     }
 
     private fun bindData(data: MovieItem) {
+        val year = data.releaseDate?.substring(0, 4) ?: "Error"
+
+        CoroutineScope(Dispatchers.Main).launch {
+            val ids = withContext(Dispatchers.Default) {
+                viewModel.getAllIds()
+            }
+            isFav = if (data.id in ids) {
+                binding.toFavButton.setDrawable(R.drawable.ic_fav)
+                true
+            } else {
+                binding.toFavButton.setDrawable((R.drawable.ic_fav_passive))
+                false
+            }
+        }
+
+        binding.toFavButton.setOnClickListener {
+            if (!isFav) {
+                viewModel.addToFav(
+                    FavMovie(
+                        movieId = data.id,
+                        title = data.title,
+                        vote = data.voteAverage,
+                        lang = data.originalLanguage,
+                        year = year,
+                        poster = data.posterPath
+                    )
+                )
+                isFav = true
+                binding.toFavButton.setDrawable(R.drawable.ic_fav)
+            } else {
+                isFav = false
+                data.id?.let { it1 -> viewModel.removeFromFav(it1) }
+                binding.toFavButton.setDrawable(R.drawable.ic_fav_passive)
+            }
+        }
 
         binding.titleTv.text = data.title.toString()
         binding.languageTv2.text = data.originalLanguage.toString()
-        binding.yearTv2.text = data.releaseDate?.substring(0, 4) ?: "Error"
+        binding.yearTv2.text = year
         binding.descriptionTv.text = data.overview.toString()
 
         binding.posterImg.loadImg(IMG_DOMAIN + data.posterPath.toString())
@@ -156,7 +199,7 @@ class SingleMovieFragment : BaseFragment<SingleMovieFragmentBinding, SingleMovie
     }
 
     private fun retrieveData() {
-        val movie = arguments?.get("movieId")
+        val movie = arguments?.get(MOVIE_ID)
         if (movie != null) {
             currentMovieId = movie as Int
 

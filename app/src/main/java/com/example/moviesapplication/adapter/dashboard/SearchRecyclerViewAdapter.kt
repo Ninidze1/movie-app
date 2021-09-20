@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapplication.databinding.DropDownItemBinding
-import com.example.moviesapplication.entity.Search
+import com.example.moviesapplication.entity.dashboard.Search
 
 typealias onModelClick = (id: Int) -> Unit
 class SearchRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

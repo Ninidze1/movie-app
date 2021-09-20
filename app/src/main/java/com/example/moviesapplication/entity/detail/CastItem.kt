@@ -1,5 +1,4 @@
-package com.example.moviesapplication.entity
-
+package com.example.moviesapplication.entity.detail
 
 import com.google.gson.annotations.SerializedName
 

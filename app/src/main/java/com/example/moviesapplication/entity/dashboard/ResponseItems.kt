@@ -1,4 +1,4 @@
-package com.example.moviesapplication.entity
+package com.example.moviesapplication.entity.dashboard
 
 import com.google.gson.annotations.SerializedName
 

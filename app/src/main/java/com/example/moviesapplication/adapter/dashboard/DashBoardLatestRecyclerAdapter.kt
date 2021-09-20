@@ -6,7 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapplication.databinding.LatestPosterItemBinding
-import com.example.moviesapplication.entity.MoviePoster
+import com.example.moviesapplication.entity.dashboard.MoviePoster
 import com.example.moviesapplication.extensions.loadImg
 import com.example.moviesapplication.utils.Constants.IMG_DOMAIN
 

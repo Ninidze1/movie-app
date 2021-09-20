@@ -1,6 +1,7 @@
 package com.example.moviesapplication.network
 
-import com.example.moviesapplication.entity.*
+import com.example.moviesapplication.entity.dashboard.*
+import com.example.moviesapplication.entity.detail.CastItem
 import com.example.moviesapplication.utils.Constants.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET

@@ -66,7 +66,7 @@ class RegisterFragment : BaseFragment<RegisterFragmentBinding, RegisterViewModel
         else
             status++
 
-        if (password.length < 8)
+        if (password.length < 6)
             binding.passwordRegEt.setErrorField("Too short password, min 8 character")
         else
             status++

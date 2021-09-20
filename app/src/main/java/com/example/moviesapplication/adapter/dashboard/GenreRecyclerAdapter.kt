@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapplication.databinding.GenresItemBinding
-import com.example.moviesapplication.entity.Genre
+import com.example.moviesapplication.entity.dashboard.Genre
 
 typealias genreClick = (genreId: Int, genre: String) -> Unit
 class GenreRecyclerAdapter: RecyclerView.Adapter<GenreRecyclerAdapter.ItemHolder>() {

@@ -24,6 +24,7 @@ import com.example.moviesapplication.extensions.show
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.paging.loading.LoaderStateAdapter
 import com.example.moviesapplication.repository.firebase.FirebaseRepository
+import com.example.moviesapplication.utils.Constants.MOVIE_ID
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -46,6 +47,8 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
 
     override fun init(inflater: LayoutInflater, container: ViewGroup?) {
 
+        binding.root.setColorSchemeResources(R.color.main_color)
+
         requestMovies()
         recyclerSetup()
         observers()
@@ -60,19 +63,19 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         }
 
         popularAdapter.onMovieClick = { movieId ->
-            putInBundleAndNavigate(movieId, R.id.action_navigation_dashboard_to_singleMovieFragment)
+            putInBundleAndNavigate(MOVIE_ID, movieId, R.id.action_navigation_dashboard_to_singleMovieFragment)
         }
 
         upComingAdapter.onPosterClick = { movieId ->
-            putInBundleAndNavigate(movieId, R.id.action_navigation_dashboard_to_singleMovieFragment)
+            putInBundleAndNavigate(MOVIE_ID, movieId, R.id.action_navigation_dashboard_to_singleMovieFragment)
         }
 
         searchAdapter.onResultClick = { movieId ->
-            putInBundleAndNavigate(movieId, R.id.action_navigation_dashboard_to_singleMovieFragment)
+            putInBundleAndNavigate(MOVIE_ID, movieId, R.id.action_navigation_dashboard_to_singleMovieFragment)
         }
 
         genresAdapter.genreClick = { genreId, genre ->
-            binding.root.smoothScrollBy(0, 1400)
+            binding.scrollview.smoothScrollBy(0, 1400)
 
             viewModel.popularMovies()
 
@@ -84,6 +87,12 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
                     popularAdapter.submitData(filteredList)
                 }
             })
+        }
+
+        binding.root.setOnRefreshListener {
+            viewModel.upComingMovies()
+            viewModel.popularMovies()
+            observers()
         }
     }
 
@@ -121,7 +130,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
 
         viewModel.popularMovies().observe(viewLifecycleOwner, { data ->
             lifecycleScope.launch {
-
+                binding.root.isRefreshing = false
                 d("tagta2g", "$data")
                 popularAdapter.submitData(data)
             }
@@ -130,6 +139,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         viewModel.upComingMovies().observe(viewLifecycleOwner, { data ->
             lifecycleScope.launch {
                 d("dataCheckw", "$data")
+                binding.root.isRefreshing = false
                 upComingAdapter.submitData(data)
             }
         })

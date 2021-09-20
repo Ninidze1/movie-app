@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.moviesapplication.entity.GenreResponse
-import com.example.moviesapplication.entity.MovieItem
-import com.example.moviesapplication.entity.MoviePoster
-import com.example.moviesapplication.entity.ResponseSearch
+import com.example.moviesapplication.entity.dashboard.GenreResponse
+import com.example.moviesapplication.entity.dashboard.MovieItem
+import com.example.moviesapplication.entity.dashboard.MoviePoster
+import com.example.moviesapplication.entity.dashboard.ResponseSearch
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.repository.movies.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

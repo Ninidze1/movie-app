@@ -1,125 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:scrollbars="none"
     android:layout_height="wrap_content"
-    android:background="@color/secondary_color"
-    android:overScrollMode="never"
     tools:context=".screens.bottom_nav.dashboard.DashboardFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/secondary_color"
+        android:overScrollMode="never"
+        android:scrollbars="none"
         tools:context=".screens.bottom_nav.dashboard.DashboardFragment">
 
-        <TextView
-            android:id="@+id/popularTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/proxima_black"
-            android:text="@string/popular"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/futureRecylcer" />
-
-        <TextView
-            android:id="@+id/upComingTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/proxima_black"
-            android:text="@string/upcoming"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genre" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/search_bar"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="25dp"
-            android:background="@drawable/edit_text_shape"
-            android:drawableEnd="@drawable/ic_search"
-            android:fontFamily="@font/montera_regular"
-            android:hint="@string/search"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingStart="22dp"
-            android:paddingEnd="24dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/gray_blue"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/genre"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_bar" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/searchRecycler"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_shape_search"
-            android:elevation="50dp"
-            android:overScrollMode="never"
-            android:paddingBottom="10dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/search_bar"
-            app:layout_constraintHeight_max="250dp"
-            app:layout_constraintStart_toStartOf="@+id/search_bar"
-            app:layout_constraintTop_toBottomOf="@+id/search_bar" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/closeSearchBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:src="@drawable/ic_close"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/search_bar"
-            app:layout_constraintEnd_toEndOf="@+id/search_bar"
-            app:layout_constraintTop_toTopOf="@+id/search_bar" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dashboardRecycler"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/popularTv" />
+            android:background="@color/secondary_color"
+            tools:context=".screens.bottom_nav.dashboard.DashboardFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/futureRecylcer"
-            android:layout_width="409dp"
-            android:layout_height="306dp"
-            android:layout_marginTop="16dp"
-            android:overScrollMode="never"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/upComingTv" />
+            <TextView
+                android:id="@+id/popularTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/proxima_black"
+                android:text="@string/popular"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/futureRecylcer" />
+
+            <TextView
+                android:id="@+id/upComingTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/proxima_black"
+                android:text="@string/upcoming"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/genre" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/search_bar"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/edit_text_shape"
+                android:drawableEnd="@drawable/ic_search"
+                android:fontFamily="@font/montera_regular"
+                android:hint="@string/search"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="22dp"
+                android:paddingEnd="24dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/genre"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_bar" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchRecycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_shape_search"
+                android:elevation="50dp"
+                android:overScrollMode="never"
+                android:paddingBottom="10dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/search_bar"
+                app:layout_constraintHeight_max="250dp"
+                app:layout_constraintStart_toStartOf="@+id/search_bar"
+                app:layout_constraintTop_toBottomOf="@+id/search_bar" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/closeSearchBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/ic_close"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/search_bar"
+                app:layout_constraintEnd_toEndOf="@+id/search_bar"
+                app:layout_constraintTop_toTopOf="@+id/search_bar" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dashboardRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/popularTv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/futureRecylcer"
+                android:layout_width="409dp"
+                android:layout_height="306dp"
+                android:layout_marginTop="16dp"
+                android:overScrollMode="never"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/upComingTv" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+    </ScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

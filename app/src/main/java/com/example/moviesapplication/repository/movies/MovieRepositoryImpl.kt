@@ -5,7 +5,11 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
-import com.example.moviesapplication.entity.*
+import com.example.moviesapplication.entity.dashboard.GenreResponse
+import com.example.moviesapplication.entity.dashboard.MovieItem
+import com.example.moviesapplication.entity.dashboard.MoviePoster
+import com.example.moviesapplication.entity.dashboard.ResponseSearch
+import com.example.moviesapplication.entity.detail.CastItem
 import com.example.moviesapplication.network.NetworkService
 import com.example.moviesapplication.network.Resource
 import com.example.moviesapplication.paging.source.LoadPopularMoviesPagingSource

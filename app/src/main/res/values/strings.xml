@@ -2,7 +2,6 @@
     <string name="app_name">MoviesApplication</string>
     <string name="home">Home</string>
     <string name="navigation">Navigation</string>
-    <string name="favourites">Favourites</string>
     <string name="profile">Profile</string>
     <string name="email">Email</string>
     <string name="name_surname">Name / Surname</string>
@@ -29,4 +28,11 @@
     <string name="description">Description</string>
     <string name="similar">Similar</string>
     <string name="actors">Actors</string>
+
+    <string name="security_screen">Security screen</string>
+    <string name="enter_your_passcode">Enter your passcode</string>
+    <string name="retry">Reenter your passcode</string>
+    <string name="sign_out">Sign out</string>
+    <string name="reset_pin">Reset Pin</string>
+    <string name="favourites">Favourites</string>
 </resources>

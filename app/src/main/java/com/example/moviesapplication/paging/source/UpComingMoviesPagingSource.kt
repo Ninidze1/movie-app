@@ -3,7 +3,7 @@ package com.example.moviesapplication.paging.source
 import android.util.Log.d
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.moviesapplication.entity.MoviePoster
+import com.example.moviesapplication.entity.dashboard.MoviePoster
 import com.example.moviesapplication.network.NetworkService
 import com.example.moviesapplication.utils.Constants.STARTING_PAGE_INDEX
 import retrofit2.HttpException

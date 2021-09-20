@@ -26,9 +26,11 @@ class MainActivity : AppCompatActivity() {
         initBottomNav()
 
     }
+
     private fun initBottomNav() {
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         val navView = binding.navView
         val chipNavigation: ChipNavigationBar = binding.bottomNavBar
@@ -45,9 +47,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_dashboard -> {
                     chipNavigation.setItemSelected(R.id.navigation_dashboard)
                     handleBackPressed(destination)
-                }
-                R.id.navigation_favourites -> {
-                    chipNavigation.setItemSelected(R.id.navigation_favourites)
                 }
                 R.id.navigation_profile -> {
                     chipNavigation.setItemSelected(R.id.navigation_profile)
@@ -69,23 +68,30 @@ class MainActivity : AppCompatActivity() {
             override fun handleOnBackPressed() {
                 when (destination.id) {
                     R.id.main_auth -> {
-                        navController = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                        navController =
+                            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
                         navController.navController.navigate(R.id.action_global_navigation_dashboard)
                     }
                     R.id.navigation_dashboard -> {
                         finish()
                     }
                     R.id.singleMovieFragment -> {
-                        navController = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-                        navController.navController.navigate(R.id.action_global_navigation_dashboard)
+                        navController =
+                            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                        navController.navController.navigateUp()
                     }
                 }
             }
         })
+
     }
 
     private fun hideIfAuth(destination: NavDestination, navBar: ChipNavigationBar) {
-        if (destination.id == R.id.main_auth || destination.id == R.id.singleMovieFragment)
+        if (destination.id == R.id.main_auth ||
+            destination.id == R.id.singleMovieFragment ||
+            destination.id == R.id.securityScreenFragment ||
+            destination.id == R.id.splashScreenFragment
+        )
             navBar.setGone()
         else {
             navBar.show()

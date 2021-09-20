@@ -1,10 +1,10 @@
-package com.example.moviesapplication.adapter.dashboard
+package com.example.moviesapplication.adapter.details
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapplication.databinding.CastItemLayoutBinding
-import com.example.moviesapplication.entity.Cast
+import com.example.moviesapplication.entity.detail.Cast
 import com.example.moviesapplication.extensions.loadImg
 import com.example.moviesapplication.utils.Constants
 
