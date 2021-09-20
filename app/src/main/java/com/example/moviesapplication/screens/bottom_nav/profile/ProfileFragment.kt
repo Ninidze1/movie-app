@@ -11,8 +11,10 @@ import com.example.moviesapplication.R
 import com.example.moviesapplication.adapter.profile.FavouritesRecyclerAdapter
 import com.example.moviesapplication.base.BaseFragment
 import com.example.moviesapplication.databinding.ProfileFragmentBinding
+import com.example.moviesapplication.extensions.showToast
 import com.example.moviesapplication.repository.firebase.FirebaseRepository
 import com.example.moviesapplication.utils.Constants
+import com.example.moviesapplication.utils.Constants.DEV_PERM
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +30,7 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>(
     @Inject
     lateinit var auth: FirebaseRepository
     private lateinit var adapter: FavouritesRecyclerAdapter
+    private var isDeveloper = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,11 +51,12 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>(
         initRecycler()
         deliverData()
         listeners()
+        observers()
     }
 
     private fun listeners() {
         binding.hamburgerMenu.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_profile_to_bottomSheetFragment)
+            putInBundleAndNavigate(DEV_PERM, true, R.id.action_navigation_profile_to_bottomSheetFragment)
         }
         adapter.onFavouriteClick = { movieId ->
             putInBundleAndNavigate(Constants.MOVIE_ID, movieId, R.id.action_navigation_profile_to_singleMovieFragment)
@@ -60,7 +64,23 @@ class ProfileFragment : BaseFragment<ProfileFragmentBinding, ProfileViewModel>(
         binding.backButton.setOnClickListener {
             findNavController().navigateUp()
         }
+        binding.Favourites.setOnClickListener {
+            viewModel.developerFeature()
+        }
     }
+
+    private fun observers() {
+        viewModel.clickedAmount.observe(viewLifecycleOwner, { clicked ->
+
+            if (clicked >= 3) {
+                requireContext().showToast("${9-clicked} steps to developer")
+                if (clicked == 9) {
+                    isDeveloper = true
+                }
+            }
+        })
+    }
+
 
     private fun initRecycler() {
         adapter = FavouritesRecyclerAdapter()

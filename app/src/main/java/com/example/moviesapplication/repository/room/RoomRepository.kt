@@ -16,6 +16,8 @@ class RoomRepository @Inject constructor(private val movieDao: MovieDao ) {
 
     suspend fun getAllIds(): List<Int> = movieDao.getAllIds()
 
+    suspend fun deleteAll() = movieDao.deleteAll()
+
 
 
 }

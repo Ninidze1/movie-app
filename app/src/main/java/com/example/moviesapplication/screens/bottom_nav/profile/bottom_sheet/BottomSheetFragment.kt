@@ -18,8 +18,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.moviesapplication.R
 import com.example.moviesapplication.databinding.BottomSheetFragmentBinding
+import com.example.moviesapplication.extensions.show
 import com.example.moviesapplication.extensions.showToast
 import com.example.moviesapplication.repository.firebase.FirebaseRepository
+import com.example.moviesapplication.utils.Constants
 import com.example.moviesapplication.utils.Constants.RESET_PIN
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,7 +62,15 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun init() {
         biometricAuth()
+        checkIfDev()
         listeners()
+    }
+
+    private fun checkIfDev() {
+        val isDev = arguments?.get(Constants.DEV_PERM)
+        if (isDev != null && isDev == true) {
+            binding.goOnIdButton.show()
+        }
     }
 
     private fun listeners() {
@@ -71,6 +81,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         }
         binding.resetBtn.setOnClickListener {
             biometricPrompt.authenticate(promptInfo)
+        }
+
+        binding.clearFav.setOnClickListener {
+            viewModel.clearFavourites()
+            findNavController().navigate(R.id.action_bottomSheetFragment_to_navigation_profile)
         }
     }
 

@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_gravity="bottom"
     android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
     android:background="@drawable/edit_text_shape_clicked"
+    app:layoutDescription="@xml/bottom_sheet_fragment_scene"
     tools:context=".screens.bottom_nav.profile.bottom_sheet.BottomSheetFragment">
+
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/proxima_black"
+        android:text="@string/find"
+        android:textAllCaps="false"
+        android:textSize="17sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/goOnIdButton"
+        app:layout_constraintStart_toEndOf="@+id/idInput"
+        app:layout_constraintTop_toBottomOf="@+id/goOnIdButton" />
 
     <View
         android:id="@+id/view2"
@@ -26,13 +43,46 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/custom_button"
+        android:elevation="10dp"
         android:fontFamily="@font/proxima_black"
         android:text="@string/reset_pin"
-        android:textSize="17sp"
         android:textAllCaps="false"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <Button
+        android:id="@+id/clearFav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/proxima_black"
+        android:text="@string/clear_favourites"
+        android:textAllCaps="false"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resetBtn" />
+
+    <Button
+        android:id="@+id/goOnIdButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/proxima_black"
+        android:text="@string/go_on_movie_id"
+        android:textAllCaps="false"
+        android:textSize="17sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/resetBtn"
+        app:layout_constraintStart_toStartOf="@+id/resetBtn"
+        app:layout_constraintTop_toBottomOf="@+id/clearFav" />
 
     <Button
         android:id="@+id/signOut"
@@ -41,14 +91,32 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
-        android:textSize="17sp"
-        android:fontFamily="@font/proxima_black"
-        android:textAllCaps="false"
-        android:background="@drawable/custom_button"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/proxima_black"
         android:text="@string/sign_out"
+        android:textAllCaps="false"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resetBtn" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/idInput" />
+
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/idInput"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/costum_input"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:text="5405"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/submitButton"
+        app:layout_constraintEnd_toStartOf="@+id/submitButton"
+        app:layout_constraintStart_toStartOf="@+id/goOnIdButton"
+        app:layout_constraintTop_toTopOf="@+id/submitButton" />
+</androidx.constraintlayout.motion.widget.MotionLayout>

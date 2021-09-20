@@ -35,4 +35,7 @@
     <string name="sign_out">Sign out</string>
     <string name="reset_pin">Reset Pin</string>
     <string name="favourites">Favourites</string>
+    <string name="go_on_movie_id">Go on movie Id</string>
+    <string name="clear_favourites">Clear Favourites</string>
+    <string name="find">Find</string>
 </resources>
