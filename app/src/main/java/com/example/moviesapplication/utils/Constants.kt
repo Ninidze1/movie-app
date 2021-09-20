@@ -10,6 +10,7 @@ object Constants {
     const val SESSION = "session"
     const val RESET_PIN = "resetPin"
     const val MOVIE_ID = "movieId"
+
     const val DEV_PERM = "dev_perm"
 
     const val API_KEY = "8a7a052285633fc4c44c60d8d3f24984"

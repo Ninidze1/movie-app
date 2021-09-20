@@ -41,10 +41,13 @@ class DashBoardRecyclerAdapter: PagingDataAdapter<MovieItem, DashBoardRecyclerAd
             model = getItem(absoluteAdapterPosition)!!
 
             binding.title.titleAdjustForDash()
-            val year = model.releaseDate?.substring(0, 4)
+            if (model.releaseDate!!.isNotEmpty()) {
+                val year = model.releaseDate?.substring(0, 4)
+                binding.yearTv.text = year
+            }
             binding.title.text = model.title
             binding.rating.text = model.voteAverage.toString()
-            binding.yearTv.text = year.toString()
+
             if (model.originalLanguage?.isNotEmpty() == true)
                 binding.languageTv.text = model.originalLanguage.toString()
             model.posterPath?.let { binding.imageView.loadImg(IMG_DOMAIN + model.posterPath) }

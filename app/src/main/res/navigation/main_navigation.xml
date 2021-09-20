@@ -107,6 +107,15 @@
         <action
             android:id="@+id/action_bottomSheetFragment_to_securityScreenFragment"
             app:destination="@id/securityScreenFragment" />
+        <action
+            android:id="@+id/action_bottomSheetFragment_to_singleMovieFragment"
+            app:destination="@id/singleMovieFragment"
+            app:popUpTo="@id/main_navigation"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_bot"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bot" />
     </dialog>
     <fragment
         android:id="@+id/splashScreenFragment"

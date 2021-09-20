@@ -2,6 +2,7 @@ package com.example.moviesapplication.screens.bottom_nav.dashboard
 
 import android.util.Log.d
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
@@ -29,6 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewModel>(
     DashboardFragmentBinding::inflate,
@@ -47,18 +49,22 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
 
     override fun init(inflater: LayoutInflater, container: ViewGroup?) {
 
-        binding.root.setColorSchemeResources(R.color.main_color)
-
         requestMovies()
         recyclerSetup()
         observers()
         listener()
+
     }
 
     private fun listener() {
+
+        binding.scrollView.setOnScrollChangeListener { v: View, scrollX: Int, scrollY: Int, _: Int, _: Int ->
+            binding.scrollView.isEnabled = scrollY < 25
+        }
+
         searchClick()
 
-        binding.closeSearchBtn.setOnClickListener {
+        binding.included.closeSearchBtn.setOnClickListener {
             backToNormal()
         }
 
@@ -75,7 +81,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         }
 
         genresAdapter.genreClick = { genreId, genre ->
-            binding.scrollview.smoothScrollBy(0, 1400)
+            binding.scrollView.smoothScrollBy(0, 1500)
 
             viewModel.popularMovies()
 
@@ -89,48 +95,42 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
             })
         }
 
-        binding.root.setOnRefreshListener {
-            viewModel.upComingMovies()
-            viewModel.popularMovies()
-            observers()
-        }
     }
 
     private fun searchClick() {
 
-        binding.searchBar.doOnTextChanged { text, _, _, _ ->
-            binding.searchRecycler.show()
+        binding.included.searchBar.doOnTextChanged { text, _, _, _ ->
+            binding.included.searchRecycler.show()
 
-            if (binding.searchRecycler.isVisible) {
-                binding.searchBar.setBackgroundResource(R.drawable.edit_text_shape_clicked)
+            if (binding.included.searchRecycler.isVisible) {
+                binding.included.searchBar.setBackgroundResource(R.drawable.edit_text_shape_clicked)
 
             }
             if (text!!.length >= 2) {
-                binding.searchBar.removeDrawableEnd()
-                binding.closeSearchBtn.show()
+                binding.included.searchBar.removeDrawableEnd()
+                binding.included.closeSearchBtn.show()
 
                 getSearchResultWithDelay(text.toString())
             } else if (text.isEmpty()) {
-                binding.searchRecycler.setGone()
+                binding.included.searchRecycler.setGone()
                 backToNormal()
             }
         }
     }
 
     private fun backToNormal() {
-        binding.searchBar.text?.clear()
-        binding.searchRecycler.setGone()
-        binding.closeSearchBtn.setGone()
+        binding.included.searchBar.text?.clear()
+        binding.included.searchRecycler.setGone()
+        binding.included.closeSearchBtn.setGone()
 
-        binding.searchBar.setDrawableEnd(requireContext(), R.drawable.ic_search)
-        binding.searchBar.setBackgroundResource(R.drawable.edit_text_shape)
+        binding.included.searchBar.setDrawableEnd(requireContext(), R.drawable.ic_search)
+        binding.included.searchBar.setBackgroundResource(R.drawable.edit_text_shape)
     }
 
     private fun observers() {
 
         viewModel.popularMovies().observe(viewLifecycleOwner, { data ->
             lifecycleScope.launch {
-                binding.root.isRefreshing = false
                 d("tagta2g", "$data")
                 popularAdapter.submitData(data)
             }
@@ -139,7 +139,6 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         viewModel.upComingMovies().observe(viewLifecycleOwner, { data ->
             lifecycleScope.launch {
                 d("dataCheckw", "$data")
-                binding.root.isRefreshing = false
                 upComingAdapter.submitData(data)
             }
         })
@@ -187,6 +186,7 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         genresRecycler()
         searchRecycler()
         upComingRecycler()
+
     }
 
     private fun genresRecycler() {
@@ -200,18 +200,20 @@ class DashboardFragment : BaseFragment<DashboardFragmentBinding, DashboardViewMo
         binding.futureRecylcer.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.futureRecylcer.adapter = upComingAdapter.withLoadStateFooter(LoaderStateAdapter())
         snapHelper.attachToRecyclerView(binding.futureRecylcer)
+
     }
 
     private fun popularRecycler() {
         popularAdapter = DashBoardRecyclerAdapter()
         binding.dashboardRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.dashboardRecycler.adapter = popularAdapter.withLoadStateFooter(LoaderStateAdapter())
+
     }
 
     private fun searchRecycler() {
         searchAdapter = SearchRecyclerViewAdapter()
-        binding.searchRecycler.layoutManager = LinearLayoutManager(requireContext())
-        binding.searchRecycler.adapter = searchAdapter
+        binding.included.searchRecycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.included.searchRecycler.adapter = searchAdapter
     }
 
     private fun getSearchResultWithDelay(text: String) {

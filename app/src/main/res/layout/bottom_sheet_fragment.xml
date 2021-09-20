@@ -9,28 +9,29 @@
     app:layoutDescription="@xml/bottom_sheet_fragment_scene"
     tools:context=".screens.bottom_nav.profile.bottom_sheet.BottomSheetFragment">
 
-
     <Button
         android:id="@+id/submitButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_button"
         android:fontFamily="@font/proxima_black"
         android:text="@string/find"
         android:textAllCaps="false"
         android:textSize="17sp"
         android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/signOut"
         app:layout_constraintEnd_toEndOf="@+id/goOnIdButton"
-        app:layout_constraintStart_toEndOf="@+id/idInput"
-        app:layout_constraintTop_toBottomOf="@+id/goOnIdButton" />
+        app:layout_constraintStart_toEndOf="@+id/idInput" />
 
     <View
         android:id="@+id/view2"
         android:layout_width="40dp"
         android:layout_height="3dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/placeholder_shape"
+        app:layout_constraintBottom_toTopOf="@+id/resetBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,56 +41,54 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="28dp"
         android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_button"
-        android:elevation="10dp"
         android:fontFamily="@font/proxima_black"
         android:text="@string/reset_pin"
         android:textAllCaps="false"
         android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/clearFav"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/clearFav"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_button"
         android:fontFamily="@font/proxima_black"
         android:text="@string/clear_favourites"
         android:textAllCaps="false"
         android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/goOnIdButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resetBtn" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/goOnIdButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_button"
         android:fontFamily="@font/proxima_black"
         android:text="@string/go_on_movie_id"
         android:textAllCaps="false"
         android:textSize="17sp"
         android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/submitButton"
         app:layout_constraintEnd_toEndOf="@+id/resetBtn"
-        app:layout_constraintStart_toStartOf="@+id/resetBtn"
-        app:layout_constraintTop_toBottomOf="@+id/clearFav" />
+        app:layout_constraintStart_toStartOf="@+id/resetBtn" />
 
     <Button
         android:id="@+id/signOut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/custom_button"
@@ -99,10 +98,7 @@
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idInput" />
-
-
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/idInput"
@@ -112,11 +108,12 @@
         android:background="@drawable/costum_input"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
-        android:text="5405"
+        android:fontFamily="@font/montera_bold"
+        android:inputType="number"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/submitButton"
         app:layout_constraintEnd_toStartOf="@+id/submitButton"
         app:layout_constraintStart_toStartOf="@+id/goOnIdButton"
         app:layout_constraintTop_toTopOf="@+id/submitButton" />
+
 </androidx.constraintlayout.motion.widget.MotionLayout>
