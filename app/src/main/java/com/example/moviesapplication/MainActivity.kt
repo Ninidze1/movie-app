@@ -7,8 +7,8 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.moviesapplication.databinding.ActivityMainBinding
-import com.example.moviesapplication.extensions.setGone
-import com.example.moviesapplication.extensions.show
+import com.example.common.extensions.setGone
+import com.example.common.extensions.show
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.moviesapplication.screens.bottom_nav.dashboard.DashboardFragment"
+        android:name="com.example.moviesapplication.ui.dashboard.DashboardFragment"
         android:label="dashboard_fragment"
         tools:layout="@layout/dashboard_fragment" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.moviesapplication.screens.bottom_nav.profile.ProfileFragment"
+        android:name="com.example.moviesapplication.ui.profile.ProfileFragment"
         android:label="profile_fragment"
         tools:layout="@layout/profile_fragment" >
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/main_auth"
-        android:name="com.example.moviesapplication.screens.auth.AuthFragment"
+        android:name="com.example.moviesapplication.ui.auth.AuthFragment"
         android:label="auth_fragment"
         tools:layout="@layout/auth_fragment" />
     <action
@@ -58,7 +58,7 @@
         app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/singleMovieFragment"
-        android:name="com.example.moviesapplication.screens.single_movie.SingleMovieFragment"
+        android:name="com.example.moviesapplication.ui.single_movie.SingleMovieFragment"
         android:label="single_movie_fragment"
         tools:layout="@layout/single_movie_fragment" >
         <action
@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/securityScreenFragment"
-        android:name="com.example.moviesapplication.screens.auth.login.security.SecurityScreenFragment"
+        android:name="com.example.moviesapplication.ui.security.SecurityScreenFragment"
         android:label="security_screen_fragment"
         tools:layout="@layout/security_screen_fragment" >
         <action
@@ -98,7 +98,7 @@
     </fragment>
     <dialog
         android:id="@+id/bottomSheetFragment"
-        android:name="com.example.moviesapplication.screens.bottom_nav.profile.bottom_sheet.BottomSheetFragment"
+        android:name="com.example.moviesapplication.ui.profile.bottom_sheet.BottomSheetFragment"
         android:label="bottom_sheet_fragment"
         tools:layout="@layout/bottom_sheet_fragment" >
         <action
@@ -119,7 +119,7 @@
     </dialog>
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.example.moviesapplication.screens.splash.SplashScreenFragment"
+        android:name="com.example.moviesapplication.ui.splash.SplashScreenFragment"
         android:label="splash_screen_fragment"
         tools:layout="@layout/splash_screen_fragment" >
         <action

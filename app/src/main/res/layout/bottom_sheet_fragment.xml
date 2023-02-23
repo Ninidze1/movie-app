@@ -7,7 +7,7 @@
     android:layout_gravity="bottom"
     android:background="@drawable/edit_text_shape_clicked"
     app:layoutDescription="@xml/bottom_sheet_fragment_scene"
-    tools:context=".screens.bottom_nav.profile.bottom_sheet.BottomSheetFragment">
+    tools:context=".ui.profile.bottom_sheet.BottomSheetFragment">
 
     <Button
         android:id="@+id/submitButton"

@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondary_color_tale"
     android:overScrollMode="never"
     android:scrollbars="none"
-    android:background="@color/secondary_color_tale"
-    android:layout_height="match_parent"
-    tools:context=".screens.single_movie.SingleMovieFragment">
+    tools:context=".ui.single_movie.SingleMovieFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".screens.single_movie.SingleMovieFragment">
+        tools:context=".ui.single_movie.SingleMovieFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/actorsRecycler"
@@ -30,8 +30,8 @@
             android:id="@+id/backgroundPoster"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:foreground="@drawable/foreground_gradient"
             android:background="@color/gray_blue"
+            android:foreground="@drawable/foreground_gradient"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,11 +42,11 @@
             android:id="@+id/shimmerLayout"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            app:shimmer_auto_start="true"
-            app:shimmer_tilt="20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:shimmer_auto_start="true"
+            app:shimmer_tilt="20">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
@@ -95,11 +95,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:elevation="500dp"
-            app:shimmer_duration="700"
             app:layout_constraintBottom_toBottomOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="@+id/cardView"
             app:layout_constraintStart_toStartOf="@+id/cardView"
-            app:layout_constraintTop_toTopOf="@+id/cardView">
+            app:layout_constraintTop_toTopOf="@+id/cardView"
+            app:shimmer_duration="700">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="120dp"
@@ -132,11 +132,11 @@
             android:paddingTop="3dp"
             android:paddingEnd="12dp"
             android:paddingBottom="3dp"
-            android:text="7.2"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/backgroundPoster"
-            app:layout_constraintStart_toStartOf="@+id/titleTv" />
+            app:layout_constraintStart_toStartOf="@+id/titleTv"
+            tools:text="7.2" />
 
         <TextView
             android:id="@+id/titleTv"
@@ -265,8 +265,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
-            android:elevation="50dp"
             android:background="@drawable/placeholder_shape"
+            android:elevation="50dp"
             android:padding="8dp"
             android:src="@drawable/ic_fav_passive"
             app:layout_constraintEnd_toEndOf="parent"
@@ -276,10 +276,10 @@
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="50dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:background="@android:color/transparent"
+            android:elevation="50dp"
             android:src="@drawable/ic_previous"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
